@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://sb6ym24rfkad"]
+
+[ext_resource type="PackedScene" uid="uid://bextjj1hoo11r" path="res://assets/body.blend" id="1_duca2"]
+[ext_resource type="Script" path="res://components/utility/hurtbox.gd" id="2_mu8gf"]
+[ext_resource type="Script" path="res://components/health_component.gd" id="3_etq5b"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_fanwy"]
+height = 2.41369
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_cp0fw"]
+radius = 0.05
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_utqa7"]
+size = Vector3(0.188503, 0.415464, 0.1)
+
+[node name="Dummy" type="StaticBody3D"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+collision_layer = 2
+collision_mask = 31
+
+[node name="body" parent="." instance=ExtResource("1_duca2")]
+transform = Transform3D(0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.205, 0, 0, 0, 0.205, 0, 0, 0, 0.205, 0.000152409, 0.250894, -0.000171661)
+shape = SubResource("CylinderShape3D_fanwy")
+disabled = true
+
+[node name="HeadHurtBox" type="Area3D" parent="." node_paths=PackedStringArray("health_comp")]
+script = ExtResource("2_mu8gf")
+health_comp = NodePath("../HealthComponent")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HeadHurtBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.477649, -0.00958052)
+shape = SubResource("SphereShape3D_cp0fw")
+
+[node name="BodyHurtBox" type="Area3D" parent="." node_paths=PackedStringArray("health_comp")]
+script = ExtResource("2_mu8gf")
+health_comp = NodePath("../HealthComponent")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BodyHurtBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00147827, 0.215544, 0)
+shape = SubResource("BoxShape3D_utqa7")
+
+[node name="HealthComponent" type="Node3D" parent="."]
+script = ExtResource("3_etq5b")
+max_health = 5

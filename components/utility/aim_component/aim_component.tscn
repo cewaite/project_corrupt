@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://0iabl60bscqx"]
+
+[ext_resource type="Script" path="res://components/utility/aim_component/aim_component.gd" id="1_6do5g"]
+
+[node name="AimComponent" type="Node3D" node_paths=PackedStringArray("aim_ray")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.608581, 0)
+script = ExtResource("1_6do5g")
+aim_ray = NodePath("GunRayCast")
+
+[node name="GunRayCast" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-06, -1, 0, 100, -4.37114e-08, 0, 0.608581, 0)
+collision_mask = 156
+collide_with_areas = true
