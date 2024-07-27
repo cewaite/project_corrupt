@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://exl64ox85q1"]
 
-[ext_resource type="PackedScene" uid="uid://b28a1rjspin2t" path="res://scenes/player/player.tscn" id="1_5xdc8"]
-[ext_resource type="PackedScene" uid="uid://sb6ym24rfkad" path="res://scenes/dummy.tscn" id="2_qhm4y"]
+[ext_resource type="PackedScene" uid="uid://t8sono4advwa" path="res://entities/player_v2/player_v2.tscn" id="2_k07xf"]
+[ext_resource type="PackedScene" uid="uid://sb6ym24rfkad" path="res://entities/dummy.tscn" id="2_qhm4y"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_res8t"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -35,9 +35,6 @@ collision_layer = 16
 collision_mask = 31
 size = Vector3(100, 0.01, 100)
 material = SubResource("StandardMaterial3D_6dt14")
-
-[node name="Player" parent="." instance=ExtResource("1_5xdc8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.52162, 0)
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.8396, 0.939914, -9.65164)
@@ -105,3 +102,6 @@ size = Vector3(5, 1, 5)
 
 [node name="Dummy" parent="." instance=ExtResource("2_qhm4y")]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -1, 0, -5)
+
+[node name="PlayerV2" parent="." instance=ExtResource("2_k07xf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.04695, 0)

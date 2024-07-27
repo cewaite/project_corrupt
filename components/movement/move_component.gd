@@ -1,4 +1,4 @@
-class_name MoveComponent extends Node3D
+class_name MoveComponent extends Node
 
 enum WalkState{
 	WALK,
@@ -29,12 +29,14 @@ var curr_max_speed : float = 0
 var curr_acc : float = 0
 var curr_dec : float = 0
 
-func _ready():
-	update_state()
+#func _ready():
+	#update_state()
 
 func handle_move(delta):
+	## Ensure speed calculations are using the correct state based on PlayerInputComp##
+	update_state()
+	
 	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir = input_comp.get_move_input()
 	var direction
 	if input_comp is PlayerInputComponent:
@@ -55,16 +57,18 @@ func handle_move(delta):
 		parent.velocity.x = lerp(parent.velocity.x, direction.x * curr_max_speed, FALLING_CONTROL * delta)
 		parent.velocity.z = lerp(parent.velocity.z, direction.z * curr_max_speed, FALLING_CONTROL * delta)
 
-func activate_move():
-	parent.move_and_slide()
+#func activate_move():
+	#parent.move_and_slide()
 
 func update_state():
 	if input_comp is PlayerInputComponent:
-		if input_comp.get_crouch_input:
-			curr_walk_state = WalkState.CROUCH
-		else:
-			curr_walk_state = WalkState.WALK
-
+		if input_comp.get_crouch_input() and parent.is_on_floor():
+			if curr_walk_state != WalkState.CROUCH:
+				curr_walk_state = WalkState.CROUCH
+		elif !input_comp.height_ray.is_colliding():
+			if curr_walk_state != WalkState.WALK:
+				curr_walk_state = WalkState.WALK
+	
 	match curr_walk_state:
 		WalkState.WALK:
 			curr_max_speed = WALK_SPEED_MAX

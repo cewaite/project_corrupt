@@ -24,7 +24,6 @@ transform = Transform3D(0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, 0, 0, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.205, 0, 0, 0, 0.205, 0, 0, 0, 0.205, 0.000152409, 0.250894, -0.000171661)
 shape = SubResource("CylinderShape3D_fanwy")
-disabled = true
 
 [node name="HeadHurtBox" type="Area3D" parent="." node_paths=PackedStringArray("health_comp")]
 script = ExtResource("2_mu8gf")

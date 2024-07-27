@@ -25,6 +25,7 @@ window/size/viewport_height=1080
 folder_colors={
 "res://assets/": "red",
 "res://components/": "purple",
+"res://entities/": "orange",
 "res://items/": "green",
 "res://resources/": "gray"
 }

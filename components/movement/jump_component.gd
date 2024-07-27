@@ -1,3 +1,4 @@
+class_name JumpComponent
 extends Node
 
 @export var JUMP_VELOCITY = 6.0

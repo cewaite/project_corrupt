@@ -1,5 +1,5 @@
 ## This is a basic input node from which all will inherit. 
-class_name InputComponent extends Node3D
+class_name InputComponent extends Node
 
 var move_input : Vector2	## Vector2 for which direction on x and z to move
 var jump_input : bool	## True for jump, false otherwise. 
@@ -15,6 +15,6 @@ func get_jump_input() -> bool:
 	return jump_input
 
 #/
-## Base function to handle inputs. 
-func handle_move_inputs(delta): 
+## Base function to handle inputs. TO BE OVERWRITTEN
+func _handle_move_inputs(_delta): 
 	pass

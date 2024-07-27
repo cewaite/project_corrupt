@@ -1,6 +1,7 @@
 class_name PlayerInputComponent extends InputComponent
 
 @export var head: Node3D
+@export var height_ray: RayCast3D
 
 var crouch_input: bool	## Detect if Player is crouching
 var direction_input: Vector3
