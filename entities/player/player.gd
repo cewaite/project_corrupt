@@ -100,3 +100,6 @@ func _UpdateCollider():
 			collider.position.y = COLLIDER_HEIGHT_CROUCH / 2.0
 			curr_bob_freq = BOB_FREQ_CROUCH
 			curr_bob_amp = BOB_AMP_CROUCH
+
+func on_item_pick_up(item):
+	print_debug("I picked up a ", item.name)

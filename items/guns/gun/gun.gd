@@ -1,4 +1,4 @@
-extends Node3D
+class_name Gun extends Node3D
 
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
 
@@ -24,3 +24,8 @@ func shoot(collision_dict):
 func reload():
 	gun_res.reload()
 
+
+func _on_area_3d_body_entered(body):
+	if body.has_method("on_item_picked_up"):
+		body.on_item_picked_up(gun_res)
+		queue_free()

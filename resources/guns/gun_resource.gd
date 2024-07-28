@@ -1,8 +1,8 @@
 class_name GunResource
-extends Resource
+extends ItemResource
 
-const id: String = "gun"
-@export var name: String
+# const id: String = "gun"
+# @export var name: String
 @export var damage: int
 @export var max_ammo: int
 @export var full_auto: bool

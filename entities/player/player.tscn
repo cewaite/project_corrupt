@@ -41,6 +41,7 @@ input_comp = NodePath("../../Controllers/PlayerInputComponent")
 
 [node name="InventoryComponent" type="Node" parent="Utility"]
 script = ExtResource("4_6xs5b")
+max_slots = 4
 
 [node name="Collider" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_cfpqj")

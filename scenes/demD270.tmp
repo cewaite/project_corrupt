@@ -2,10 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://t8sono4advwa" path="res://entities/player/player.tscn" id="2_k07xf"]
 [ext_resource type="PackedScene" uid="uid://sb6ym24rfkad" path="res://entities/dummy.tscn" id="2_qhm4y"]
-[ext_resource type="PackedScene" uid="uid://bvvmsfyennxu1" path="res://items/guns/test_gun/test_gun.tscn" id="4_8jhof"]
-[ext_resource type="PackedScene" uid="uid://5hn3ldh2531b" path="res://assets/guns/slingshot_proprotional.blend" id="5_n2y5u"]
+[ext_resource type="PackedScene" uid="uid://ctdl01wohtv24" path="res://assets/guns/slingshotv2.blend" id="4_4phjh"]
+[ext_resource type="Script" path="res://pickup.gd" id="4_vrwm0"]
 [ext_resource type="PackedScene" uid="uid://wwqhmf2tgxbb" path="res://scenes/hud/hud.tscn" id="5_wrlyo"]
-[ext_resource type="Script" path="res://resources/guns/gun_resource.gd" id="7_et8rh"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_res8t"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -24,15 +23,11 @@ glow_enabled = true
 albedo_color = Color(0, 0.403922, 0.988235, 1)
 anisotropy = -1.0
 
-[sub_resource type="Resource" id="Resource_rjlmt"]
-resource_local_to_scene = true
-script = ExtResource("7_et8rh")
-damage = 1
-max_ammo = 6
-full_auto = false
-spread = 0.0
-name = "Test Gun"
-model_scene = ExtResource("5_n2y5u")
+[sub_resource type="BoxShape3D" id="BoxShape3D_i7h82"]
+size = Vector3(0.0678711, 0.274475, 0.640961)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_24lx1"]
+size = Vector3(0.0678711, 0.274475, 0.640961)
 
 [node name="DemoScene" type="Node3D"]
 
@@ -122,5 +117,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.58582, 0)
 
 [node name="HUD" parent="." instance=ExtResource("5_wrlyo")]
 
-[node name="TestGun" parent="." instance=ExtResource("4_8jhof")]
-gun_res = SubResource("Resource_rjlmt")
+[node name="TestGun" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3913, 0.832469, 0)
+script = ExtResource("4_vrwm0")
+
+[node name="BodyCollider" type="CollisionShape3D" parent="TestGun"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00268555, 0.021759, -0.00465393)
+shape = SubResource("BoxShape3D_i7h82")
+
+[node name="slingshotv2" parent="TestGun" instance=ExtResource("4_4phjh")]
+transform = Transform3D(0.135, 0, 0, 0, 0.135, 0, 0, 0, 0.135, 0, 0, 0)
+
+[node name="Area3D" type="Area3D" parent="TestGun"]
+
+[node name="PickupCollider" type="CollisionShape3D" parent="TestGun/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00268555, 0.021759, -0.00465393)
+shape = SubResource("BoxShape3D_24lx1")
+
+[connection signal="body_entered" from="TestGun/Area3D" to="TestGun" method="_on_area_3d_body_entered"]

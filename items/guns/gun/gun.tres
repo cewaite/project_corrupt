@@ -5,8 +5,8 @@
 [resource]
 resource_local_to_scene = true
 script = ExtResource("1_2h7vk")
-name = "Gun"
 damage = 1
 max_ammo = 6
 full_auto = false
 spread = 0.0
+name = "Gun"

@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bvvmsfyennxu1"]
+
+[ext_resource type="Script" path="res://items/guns/test_gun/test_gun.gd" id="1_634rf"]
+[ext_resource type="Resource" uid="uid://cmt56kl2mdwle" path="res://items/guns/test_gun/test_gun.tres" id="2_xkoub"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i7h82"]
+size = Vector3(0.0678711, 0.274475, 0.640961)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_24lx1"]
+size = Vector3(0.0678711, 0.274475, 0.640961)
+
+[node name="TestGun" type="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3913, 0.832469, 0)
+collision_layer = 4
+collision_mask = 31
+script = ExtResource("1_634rf")
+gun_res = ExtResource("2_xkoub")
+
+[node name="BodyCollider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.068689, 0.0417896)
+shape = SubResource("BoxShape3D_i7h82")
+
+[node name="AutoPickupComponent" type="Area3D" parent="."]
+collision_layer = 4
+
+[node name="PickupCollider" type="CollisionShape3D" parent="AutoPickupComponent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.068689, 0.0417896)
+shape = SubResource("BoxShape3D_24lx1")
+
+[connection signal="body_entered" from="AutoPickupComponent" to="." method="_on_area_3d_body_entered"]
