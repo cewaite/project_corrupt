@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bextjj1hoo11r" path="res://assets/body.blend" id="1_duca2"]
 [ext_resource type="Script" path="res://components/utility/hurtbox.gd" id="2_mu8gf"]
-[ext_resource type="Script" path="res://components/health_component.gd" id="3_etq5b"]
+[ext_resource type="Script" path="res://components/utility/health_component.gd" id="3_etq5b"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_fanwy"]
 height = 2.41369

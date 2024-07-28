@@ -23,3 +23,4 @@ func shoot(collision_dict):
 
 func reload():
 	gun_res.reload()
+

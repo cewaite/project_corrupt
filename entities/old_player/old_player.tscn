@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://b28a1rjspin2t"]
+
+[ext_resource type="Script" path="res://entities/old_player/old_player.gd" id="1_0i5jh"]
+[ext_resource type="PackedScene" uid="uid://cf02xsoageq66" path="res://items/guns/gun/gun.tscn" id="2_rv84n"]
+[ext_resource type="Script" path="res://resources/guns/gun_resource.gd" id="3_hs1hu"]
+[ext_resource type="PackedScene" uid="uid://0iabl60bscqx" path="res://components/utility/aim_component/aim_component.tscn" id="4_eg61h"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5hxl5"]
+
+[sub_resource type="Resource" id="Resource_ub07r"]
+resource_local_to_scene = true
+script = ExtResource("3_hs1hu")
+name = "Gun"
+damage = 1
+max_ammo = 6
+full_auto = false
+spread = 0.0
+
+[node name="OldPlayer" type="CharacterBody3D" node_paths=PackedStringArray("gun", "aim_comp")]
+collision_mask = 30
+script = ExtResource("1_0i5jh")
+gun = NodePath("Head/Camera/Gun")
+aim_comp = NodePath("Head/Camera/AimComponent")
+
+[node name="Collider" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_5hxl5")
+
+[node name="HeightRayCast" type="RayCast3D" parent="."]
+transform = Transform3D(-1, 1.74846e-07, 0, -8.74228e-08, -2, 0, 0, 0, 1, 0, 0, 0)
+collision_mask = 16
+
+[node name="Head" type="Node3D" parent="."]
+
+[node name="Camera" type="Camera3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.608581, 0)
+
+[node name="Gun" parent="Head/Camera" instance=ExtResource("2_rv84n")]
+transform = Transform3D(-1, 0, 2.53518e-06, 0, 1, 0, -2.53518e-06, 0, -1, 0.4, -0.396, -0.484)
+gun_res = SubResource("Resource_ub07r")
+
+[node name="AimComponent" parent="Head/Camera" instance=ExtResource("4_eg61h")]

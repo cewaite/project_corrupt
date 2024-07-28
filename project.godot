@@ -15,6 +15,10 @@ run/main_scene="res://scenes/demo_scene.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+InteractablesManager="*res://globals/interactables_manager.gd"
+
 [display]
 
 window/size/viewport_width=1920
@@ -26,6 +30,7 @@ folder_colors={
 "res://assets/": "red",
 "res://components/": "purple",
 "res://entities/": "orange",
+"res://globals/": "blue",
 "res://items/": "green",
 "res://resources/": "gray"
 }

@@ -68,6 +68,8 @@ func update_state():
 		elif !input_comp.height_ray.is_colliding():
 			if curr_walk_state != WalkState.WALK:
 				curr_walk_state = WalkState.WALK
+	else:
+		curr_walk_state = WalkState.WALK
 	
 	match curr_walk_state:
 		WalkState.WALK:
