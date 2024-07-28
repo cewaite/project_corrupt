@@ -1,12 +1,13 @@
 class_name GunResource
-extends ItemResource
+extends WeaponResource
 
 # const id: String = "gun"
 # @export var name: String
-@export var damage: int
+# @export var damage: int
 @export var max_ammo: int
 @export var full_auto: bool
 @export var spread: float
+@export var reload_speed: float
 # @export var AmmoType: AmmoType
 
 var curr_ammo: int

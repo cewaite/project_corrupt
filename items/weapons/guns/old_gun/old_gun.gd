@@ -1,4 +1,4 @@
-class_name Gun extends Node3D
+extends Node3D
 
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
 

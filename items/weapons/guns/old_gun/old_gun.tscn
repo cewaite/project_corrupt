@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://cf02xsoageq66"]
 
-[ext_resource type="Script" path="res://items/guns/gun/gun.gd" id="1_go3si"]
-[ext_resource type="PackedScene" uid="uid://ctdl01wohtv24" path="res://assets/guns/slingshotv2.blend" id="2_04efm"]
-[ext_resource type="Resource" uid="uid://c1vmtg2elbb1v" path="res://items/guns/gun/gun.tres" id="2_s4l1w"]
+[ext_resource type="Script" path="res://items/weapons/guns/old_gun/old_gun.gd" id="1_fktak"]
+[ext_resource type="Resource" uid="uid://c1vmtg2elbb1v" path="res://items/weapons/guns/old_gun/old_gun.tres" id="2_yijav"]
+[ext_resource type="PackedScene" uid="uid://ctdl01wohtv24" path="res://assets/guns/slingshotv2.blend" id="3_cmqmk"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_rgmny"]
 height = 0.55
@@ -49,14 +49,14 @@ _data = {
 "shoot": SubResource("Animation_xbm6o")
 }
 
-[node name="Gun" type="RigidBody3D"]
+[node name="OldGun" type="RigidBody3D"]
 transform = Transform3D(-1, 0, 2.53518e-06, 0, 1, 0, -2.53518e-06, 0, -1, 0, 0, 0)
 collision_layer = 4
 collision_mask = 16
-script = ExtResource("1_go3si")
-gun_res = ExtResource("2_s4l1w")
+script = ExtResource("1_fktak")
+gun_res = ExtResource("2_yijav")
 
-[node name="slingshotv2" parent="." instance=ExtResource("2_04efm")]
+[node name="slingshotv2" parent="." instance=ExtResource("3_cmqmk")]
 transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 0, 0, 0.28)
 
 [node name="BodyCollider" type="CollisionShape3D" parent="."]

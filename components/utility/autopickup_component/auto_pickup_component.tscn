@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://c27xxn1llwq8s"]
+
+[ext_resource type="Script" path="res://components/utility/autopickup_component/autopickup_component.gd" id="1_bfnwx"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_24lx1"]
+size = Vector3(0.0678711, 0.274475, 0.640961)
+
+[node name="AutoPickupComponent" type="Area3D"]
+collision_layer = 4
+script = ExtResource("1_bfnwx")
+
+[node name="PickupCollider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.068689, 0.0417896)
+shape = SubResource("BoxShape3D_24lx1")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,18 +1,19 @@
-class_name InventoryComponent extends Node
+class_name InventoryComponent extends Component
+
+# @export var parent: CharacterBody3D
 
 @export var slots: Array[WieldableResource]
 @export var max_slots: int = 1
 var curr_slot: int = 0
 var curr_mags: Dictionary
+var curr_scrap: int
+var curr_biomass: int
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	super()
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func get_component_name() -> StringName: 
+	return "InventoryComponent"
 
 func pickup_wieldable(wieldable_res) -> WieldableResource:
 	print_debug("Picked up ", wieldable_res.name)
@@ -43,7 +44,7 @@ func dec_slot():
 	curr_slot -= 1
 	print_debug("Holding a ", get_curr_equipped().name)
 
-func equip_slot(slot_num: int):
+func select_slot(slot_num: int):
 	assert(slot_num >= 0 and slot_num < slots.size() - 1)
 	curr_slot = slot_num
 	print_debug("Holding a ", get_curr_equipped().name)

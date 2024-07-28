@@ -2,11 +2,9 @@
 
 [ext_resource type="Script" path="res://items/guns/test_gun/test_gun.gd" id="1_634rf"]
 [ext_resource type="Resource" uid="uid://cmt56kl2mdwle" path="res://items/guns/test_gun/test_gun.tres" id="2_xkoub"]
+[ext_resource type="PackedScene" uid="uid://c27xxn1llwq8s" path="res://components/utility/autopickup_component/auto_pickup_component.tscn" id="3_8odha"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i7h82"]
-size = Vector3(0.0678711, 0.274475, 0.640961)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_24lx1"]
 size = Vector3(0.0678711, 0.274475, 0.640961)
 
 [node name="TestGun" type="RigidBody3D"]
@@ -20,11 +18,4 @@ gun_res = ExtResource("2_xkoub")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.068689, 0.0417896)
 shape = SubResource("BoxShape3D_i7h82")
 
-[node name="AutoPickupComponent" type="Area3D" parent="."]
-collision_layer = 4
-
-[node name="PickupCollider" type="CollisionShape3D" parent="AutoPickupComponent"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.068689, 0.0417896)
-shape = SubResource("BoxShape3D_24lx1")
-
-[connection signal="body_entered" from="AutoPickupComponent" to="." method="_on_area_3d_body_entered"]
+[node name="AutoPickupComponent" parent="." instance=ExtResource("3_8odha")]

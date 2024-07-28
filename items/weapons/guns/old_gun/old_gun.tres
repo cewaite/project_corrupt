@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="GunResource" load_steps=2 format=3 uid="uid://c1vmtg2elbb1v"]
 
-[ext_resource type="Script" path="res://resources/guns/gun_resource.gd" id="1_2h7vk"]
+[ext_resource type="Script" path="res://resources/items/wieldables/weapons/guns/gun_resource.gd" id="1_2h7vk"]
 
 [resource]
 resource_local_to_scene = true
