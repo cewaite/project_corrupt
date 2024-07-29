@@ -19,7 +19,7 @@ func pickup_wieldable(wieldable_res) -> WieldableResource:
 	print_debug("Picked up ", wieldable_res.name)
 	if slots.size() < max_slots:
 		slots.append(wieldable_res)
-		curr_slot = slots.size() - 1
+		curr_slot = slots.size() + 1
 		return null
 	else:
 		var dropped_res = slots.pop_at(curr_slot)

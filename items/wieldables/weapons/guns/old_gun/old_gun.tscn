@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://cf02xsoageq66"]
 
-[ext_resource type="Script" path="res://items/weapons/guns/old_gun/old_gun.gd" id="1_fktak"]
-[ext_resource type="Resource" uid="uid://c1vmtg2elbb1v" path="res://items/weapons/guns/old_gun/old_gun.tres" id="2_yijav"]
+[ext_resource type="Script" path="res://items/wieldables/weapons/guns/old_gun/old_gun.gd" id="1_fktak"]
+[ext_resource type="Resource" uid="uid://c1vmtg2elbb1v" path="res://items/wieldables/weapons/guns/old_gun/old_gun.tres" id="2_yijav"]
 [ext_resource type="PackedScene" uid="uid://ctdl01wohtv24" path="res://assets/guns/slingshotv2.blend" id="3_cmqmk"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_rgmny"]

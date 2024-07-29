@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://b28a1rjspin2t"]
 
 [ext_resource type="Script" path="res://entities/old_player/old_player.gd" id="1_0i5jh"]
-[ext_resource type="PackedScene" uid="uid://cf02xsoageq66" path="res://items/weapons/guns/old_gun/old_gun.tscn" id="2_rv84n"]
+[ext_resource type="PackedScene" uid="uid://cf02xsoageq66" path="res://items/wieldables/weapons/guns/old_gun/old_gun.tscn" id="2_rv84n"]
 [ext_resource type="Script" path="res://resources/items/wieldables/weapons/guns/gun_resource.gd" id="3_hs1hu"]
 [ext_resource type="PackedScene" uid="uid://0iabl60bscqx" path="res://components/utility/aim_component/aim_component.tscn" id="4_eg61h"]
 

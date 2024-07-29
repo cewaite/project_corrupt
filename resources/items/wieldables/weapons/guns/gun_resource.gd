@@ -8,6 +8,7 @@ extends WeaponResource
 @export var full_auto: bool
 @export var spread: float
 @export var reload_speed: float
+@export var scrap_price: int = 5
 # @export var AmmoType: AmmoType
 
 var curr_ammo: int
