@@ -51,7 +51,7 @@ func _input(event):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	## Get move and attack inputs ##
-	input_comp.handle_inputs(delta)
+	input_comp.handle_move_inputs(delta)
 	
 	## Update Camera and Collider depending on inputs ##
 	_UpdateCamera(delta)

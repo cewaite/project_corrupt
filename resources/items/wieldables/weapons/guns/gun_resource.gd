@@ -14,7 +14,6 @@ extends WeaponResource
 var curr_ammo: int
 
 func shoot(collider):
-	
 	if curr_ammo > 0:
 		if collider is HurtBox:
 			collider.health_comp.take_damage(damage)

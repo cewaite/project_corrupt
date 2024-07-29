@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://items/wieldables/weapons/guns/gun/gun.gd" id="1_634rf"]
 [ext_resource type="Resource" uid="uid://cmt56kl2mdwle" path="res://items/wieldables/weapons/guns/gun/gun.tres" id="2_xkoub"]
-[ext_resource type="PackedScene" uid="uid://c27xxn1llwq8s" path="res://components/utility/autopickup_component/auto_pickup_component.tscn" id="3_8odha"]
+[ext_resource type="PackedScene" uid="uid://banf811hfdyxw" path="res://components/utility/interactable_component/interactable_component.tscn" id="3_ih3ye"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i7h82"]
 size = Vector3(0.0678711, 0.274475, 0.640961)
@@ -17,4 +17,9 @@ item_res = ExtResource("2_xkoub")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.068689, 0.0417896)
 shape = SubResource("BoxShape3D_i7h82")
 
-[node name="AutoPickupComponent" parent="." instance=ExtResource("3_8odha")]
+[node name="InteractableComponent" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("3_ih3ye")]
+parent = NodePath("..")
+
+[node name="InteractCollider" type="CollisionShape3D" parent="InteractableComponent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.068689, 0.0417896)
+shape = SubResource("BoxShape3D_i7h82")

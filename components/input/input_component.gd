@@ -16,5 +16,5 @@ func get_jump_input() -> bool:
 
 #/
 ## Base function to handle inputs. TO BE OVERWRITTEN
-func handle_inputs(_delta): 
+func handle_move_inputs(_delta): 
 	pass

@@ -1,6 +1,9 @@
-class_name AimComponent extends Node3D
+class_name AimComponent extends Component
 
 @export var aim_ray: RayCast3D
+
+func get_component_name() -> StringName: 
+	return "AimComponent"
 
 func fire_ray() -> Dictionary:
 	if aim_ray:

@@ -41,7 +41,7 @@ func handle_move(delta):
 	var direction
 	if input_comp is PlayerInputComponent:
 		# Get direction of head
-		direction = input_comp.direction_input
+		direction = input_comp.get_direction_input()
 	else:
 		# Get direction of parents character body
 		direction = (parent.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
@@ -65,7 +65,7 @@ func update_state():
 		if input_comp.get_crouch_input() and parent.is_on_floor():
 			if curr_walk_state != WalkState.CROUCH:
 				curr_walk_state = WalkState.CROUCH
-		elif !input_comp.height_ray.is_colliding():
+		elif !input_comp.get_height_ray().is_colliding():
 			if curr_walk_state != WalkState.WALK:
 				curr_walk_state = WalkState.WALK
 	else:

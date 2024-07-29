@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://t8sono4advwa"]
+[gd_scene load_steps=9 format=3 uid="uid://t8sono4advwa"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_5eyay"]
 [ext_resource type="Script" path="res://components/input/player_input_component.gd" id="1_ndjuu"]
 [ext_resource type="Script" path="res://components/movement/move_component.gd" id="2_36bhi"]
 [ext_resource type="Script" path="res://components/movement/jump_component.gd" id="3_qxy82"]
 [ext_resource type="Script" path="res://components/utility/inventory_component.gd" id="4_6xs5b"]
+[ext_resource type="PackedScene" uid="uid://cjl6g56i2b8o7" path="res://components/utility/player_interact_component/player_interact_component.tscn" id="7_ce0qx"]
 [ext_resource type="PackedScene" uid="uid://0iabl60bscqx" path="res://components/utility/aim_component/aim_component.tscn" id="8_db6ne"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cfpqj"]
@@ -52,6 +53,10 @@ shape = SubResource("CapsuleShape3D_cfpqj")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.608581, 0)
 
 [node name="AimComponent" parent="Head/Camera" instance=ExtResource("8_db6ne")]
+
+[node name="PlayerInteractComponent" parent="Head/Camera" node_paths=PackedStringArray("parent", "player_input_comp") instance=ExtResource("7_ce0qx")]
+parent = NodePath("../../..")
+player_input_comp = NodePath("../../../Controllers/PlayerInputComponent")
 
 [node name="HeightRayCast" type="RayCast3D" parent="."]
 transform = Transform3D(-1, 1.74846e-07, 0, -8.74228e-08, -2, 0, 0, 0, 1, 0, 0, 0)

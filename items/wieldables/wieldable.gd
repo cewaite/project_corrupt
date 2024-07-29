@@ -10,6 +10,9 @@ func _ready():
 func get_item_resource():
 	return wieldable_res
 
+func interact(player):
+	on_item_pickup(player)
+
 func on_item_pickup(body):
 	if body.has_meta("InventoryComponent"):
 		var inv_comp = body.get_meta("InventoryComponent") as InventoryComponent
