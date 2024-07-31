@@ -40,9 +40,10 @@ input_comp = NodePath("../../Controllers/PlayerInputComponent")
 
 [node name="Utility" type="Node" parent="."]
 
-[node name="InventoryComponent" type="Node" parent="Utility"]
+[node name="InventoryComponent" type="Node" parent="Utility" node_paths=PackedStringArray("hand")]
 script = ExtResource("4_6xs5b")
-max_slots = 4
+hand = NodePath("../../Head/Camera/Hand")
+max_slots = 2
 
 [node name="Collider" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_cfpqj")
@@ -57,6 +58,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.608581, 0)
 [node name="PlayerInteractComponent" parent="Head/Camera" node_paths=PackedStringArray("parent", "player_input_comp") instance=ExtResource("7_ce0qx")]
 parent = NodePath("../../..")
 player_input_comp = NodePath("../../../Controllers/PlayerInputComponent")
+
+[node name="Hand" type="Node3D" parent="Head/Camera"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.395782, -0.240078, -0.675116)
 
 [node name="HeightRayCast" type="RayCast3D" parent="."]
 transform = Transform3D(-1, 1.74846e-07, 0, -8.74228e-08, -2, 0, 0, 0, 1, 0, 0, 0)

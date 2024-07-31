@@ -8,3 +8,6 @@ func _ready():
 
 func get_item_resource():
 	return gun_res
+#
+#func set_item_resource(res):
+	#gun_res = res

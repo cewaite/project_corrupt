@@ -1,16 +1,19 @@
-[gd_resource type="Resource" script_class="GunResource" load_steps=3 format=3 uid="uid://cmt56kl2mdwle"]
+[gd_resource type="Resource" script_class="GunResource" load_steps=4 format=3 uid="uid://cmt56kl2mdwle"]
 
-[ext_resource type="PackedScene" uid="uid://5hn3ldh2531b" path="res://assets/guns/slingshot_proprotional.blend" id="1_eke5p"]
+[ext_resource type="PackedScene" uid="uid://5hn3ldh2531b" path="res://assets/guns/slingshot_proprotional.blend" id="1_dc8ll"]
 [ext_resource type="Script" path="res://resources/items/wieldables/weapons/guns/gun_resource.gd" id="2_g1gsv"]
+[ext_resource type="PackedScene" uid="uid://b4wi3sn2dxlb4" path="res://items/wieldables/weapons/guns/gun/gun_item.tscn" id="2_rt5jx"]
 
 [resource]
 resource_local_to_scene = true
 script = ExtResource("2_g1gsv")
 max_ammo = 6
-full_auto = false
 spread = 0.0
 reload_speed = 0.0
-scrap_price = 100
+Type = 1
 damage = 1
-name = "Test Gun"
-model_scene = ExtResource("1_eke5p")
+scrap_price = 5
+equipped_model = ExtResource("1_dc8ll")
+name = "Gun"
+model = ExtResource("1_dc8ll")
+item_scene = ExtResource("2_rt5jx")

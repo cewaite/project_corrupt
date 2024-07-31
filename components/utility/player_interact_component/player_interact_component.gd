@@ -13,13 +13,13 @@ func _process(delta):
 	if interact_ray:
 		if interact_ray.is_colliding():
 			# print_debug("COLLIDING")
-			var interact_area = interact_ray.get_collider() as InteractableComponent
+			var object = interact_ray.get_collider()
 			#assert(interact_area is InteractableComponent)
-			# print_debug(interact_area.get_parent().name)
-			# Check for player input, call object.get_meta("InteractableComponent").interact()			
-			if player_input_comp.get_interact_input():
+			# print_debug(object.name)
+			# Check for player input, call object.get_meta("InteractableComponent").interact()
+			if player_input_comp.get_interact_input() and object.has_meta("InteractableComponent"):
 				# print_debug("INTERACT")
-				interact_area.interact(parent)
+				object.get_meta("InteractableComponent").interact(parent)
 	else:
 		print_debug("NO INTERACT RAY ASSIGNED")
 

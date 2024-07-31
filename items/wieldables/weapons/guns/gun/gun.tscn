@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" path="res://items/wieldables/weapons/guns/gun/gun.gd" id="1_634rf"]
 [ext_resource type="Resource" uid="uid://cmt56kl2mdwle" path="res://items/wieldables/weapons/guns/gun/gun.tres" id="2_xkoub"]
-[ext_resource type="PackedScene" uid="uid://banf811hfdyxw" path="res://components/utility/interactable_component/interactable_component.tscn" id="3_ih3ye"]
+[ext_resource type="Script" path="res://components/utility/interactable_component.gd" id="3_7jxy3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i7h82"]
 size = Vector3(0.0678711, 0.274475, 0.640961)
 
 [node name="Gun" type="RigidBody3D"]
-collision_layer = 4
+collision_layer = 36
 collision_mask = 30
 script = ExtResource("1_634rf")
 item_res = ExtResource("2_xkoub")
@@ -17,9 +17,6 @@ item_res = ExtResource("2_xkoub")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.068689, 0.0417896)
 shape = SubResource("BoxShape3D_i7h82")
 
-[node name="InteractableComponent" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("3_ih3ye")]
+[node name="InteractableComponent" type="Node" parent="." node_paths=PackedStringArray("parent")]
+script = ExtResource("3_7jxy3")
 parent = NodePath("..")
-
-[node name="InteractCollider" type="CollisionShape3D" parent="InteractableComponent"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.068689, 0.0417896)
-shape = SubResource("BoxShape3D_i7h82")

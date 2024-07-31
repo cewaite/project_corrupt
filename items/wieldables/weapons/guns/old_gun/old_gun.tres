@@ -9,5 +9,6 @@ max_ammo = 6
 full_auto = false
 spread = 0.0
 reload_speed = 0.0
+scrap_price = 5
 damage = 1
-name = "Gun"
+name = "Test Gun"

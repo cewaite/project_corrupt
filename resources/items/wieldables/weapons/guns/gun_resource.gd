@@ -5,20 +5,19 @@ extends WeaponResource
 # @export var name: String
 # @export var damage: int
 @export var max_ammo: int
-@export var full_auto: bool
 @export var spread: float
 @export var reload_speed: float
-@export var scrap_price: int = 5
-# @export var AmmoType: AmmoType
+
+@export_flags("Hitscan", "Projectile") var Type
+@export var projectile_scene: PackedScene 
+# @export var AmmoType: AmmoType (6.66mm, EnergyPack, etc.)
+# @export var fire_rate_comp: FireRateComponent (SemiComponent, FullAutoComponent, BurstComponent)
 
 var curr_ammo: int
 
-func shoot(collider):
-	if curr_ammo > 0:
-		if collider is HurtBox:
-			collider.health_comp.take_damage(damage)
-		curr_ammo -= 1
-		print("GUN HAS " + str(curr_ammo) + " AMMO LEFT")
+func shoot():
+	curr_ammo -= 1
+	print("GUN HAS " + str(curr_ammo) + " AMMO LEFT")
 
 func reload():
 	if curr_ammo < max_ammo:
