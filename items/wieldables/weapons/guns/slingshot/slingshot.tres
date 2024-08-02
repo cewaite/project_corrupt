@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="GunResource" load_steps=3 format=3 uid="uid://cluioy22ebgxv"]
+[gd_resource type="Resource" script_class="GunResource" load_steps=4 format=3 uid="uid://cluioy22ebgxv"]
 
 [ext_resource type="PackedScene" uid="uid://5hn3ldh2531b" path="res://assets/guns/slingshot_proprotional.blend" id="1_0et3p"]
 [ext_resource type="Script" path="res://resources/items/wieldables/weapons/guns/gun_resource.gd" id="1_7xitk"]
+[ext_resource type="PackedScene" uid="uid://c0jacunf4gsjp" path="res://items/wieldables/weapons/guns/slingshot/slingshot.tscn" id="2_5qqdv"]
 
 [resource]
 script = ExtResource("1_7xitk")
@@ -14,3 +15,4 @@ scrap_price = 5
 equipped_model = ExtResource("1_0et3p")
 name = "Slingshot_v52843643.3"
 model = ExtResource("1_0et3p")
+item_scene = ExtResource("2_5qqdv")

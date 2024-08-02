@@ -59,5 +59,5 @@ func handle_jump(delta):
 		curr_jump_cd = 0
 
 func modify_jump(jump_mults: Array[float]):
-	for multiplayer in jump_mults:
+	for multiplier in jump_mults:
 		JUMP_VELOCITY *= multiplayer

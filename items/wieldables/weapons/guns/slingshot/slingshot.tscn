@@ -1,3 +1,30 @@
-[gd_scene format=3 uid="uid://c0jacunf4gsjp"]
+[gd_scene load_steps=6 format=3 uid="uid://c0jacunf4gsjp"]
+
+[ext_resource type="Script" path="res://items/wieldables/weapons/guns/gun.gd" id="1_4pypg"]
+[ext_resource type="PackedScene" uid="uid://5hn3ldh2531b" path="res://assets/guns/slingshot_proprotional.blend" id="2_fcabw"]
+[ext_resource type="Script" path="res://components/utility/interactable_component.gd" id="3_vjmyb"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4heep"]
+size = Vector3(0.05, 0.635, 0.103)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yxlqo"]
+size = Vector3(0.05, 0.2, 0.271484)
 
 [node name="Slingshot" type="RigidBody3D"]
+collision_layer = 36
+collision_mask = 16
+script = ExtResource("1_4pypg")
+
+[node name="slingshot_proprotional" parent="." instance=ExtResource("2_fcabw")]
+
+[node name="BodyColliider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.013457, 0.0486105)
+shape = SubResource("BoxShape3D_4heep")
+
+[node name="HandleCollider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.125, -0.137383)
+shape = SubResource("BoxShape3D_yxlqo")
+
+[node name="InteractableComponent" type="Node" parent="." node_paths=PackedStringArray("parent")]
+script = ExtResource("3_vjmyb")
+parent = NodePath("..")

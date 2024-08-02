@@ -13,6 +13,6 @@ func get_item_resource():
 func set_item_resource(res):
 	item_res = res
 
-func on_item_pickup(body):
+func on_item_pickup(_body):
 	assert(false, "%s should implement on_item_pickup" % get_script().resource_path)
 
