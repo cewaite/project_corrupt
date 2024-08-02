@@ -1,81 +1,106 @@
 class_name InventoryComponent extends Component
 
 # @export var parent: CharacterBody3D
+@export var player_input_comp: PlayerInputComponent
 @export var hand: Node3D
 
 @export var slots: Array[WieldableResource]
 @export var max_slots: int = 1
+@export var throw_force: float = 5.0
 var curr_slot: int = 0
 var curr_mags: Dictionary
 var curr_scrap: int
 var curr_biomass: int
 
+var curr_equipped: WieldableResource
 var curr_equipped_model: Node3D
 
 func _ready():
 	super()
-	render_curr_slot()
+	slots.resize(max_slots)
+	update_curr_equipped()
 
 func _process(delta):
 	# TESTIN PURPOSES, move ot playerinputcomp
-	if Input.is_action_just_pressed("drop"):
+	player_input_comp.handle_wieldable_inputs()
+	
+	if player_input_comp.get_drop_input():
 		drop_wieldable()
 
 func get_component_name() -> StringName: 
 	return "InventoryComponent"
 
+# If theres a slot available, set curr_slot to that position
+# and assign the wieldable_res to it, equipping it. Else, drop 
+# the currently equipped and replace it
 func pickup_wieldable(wieldable_res) -> void:
-	print_debug("Picked up ", wieldable_res.name)
-	if slots.size() < max_slots:
-		slots.append(wieldable_res)
-		curr_slot = slots.size() - 1
-		print_debug(slots)
+	var available_slot = slots.find(null)
+	if available_slot != -1:
+		slots[available_slot] = wieldable_res
+		select_slot(available_slot)
 	else:
-		var dropped_res = slots.pop_at(curr_slot)
-		slots.insert(curr_slot, wieldable_res)
-		# Create a new item based on res and drop it
-	render_curr_slot()
-	
+		drop_wieldable()
+		slots[curr_slot] = wieldable_res
+		update_curr_equipped()
+	print_debug("Picked up ", wieldable_res.name)
 
+
+# Checks if curr_equipped is not null, therefore there is a wieldable to drop.
+# If there is, create an item version of it using its item_scene, and throw it forward
+# from the hand. Update curr equipped
 func drop_wieldable() -> void:
-	if get_curr_equipped():
-		print_debug("before drop: ", slots, " curr_slot: ", curr_slot)
-		var wieldable_res = slots.pop_at(curr_slot) as WieldableResource
-		
-		# Temporary, want gun or weapon or item manager to do this since it requires view into root node
-		print_debug(wieldable_res.name)
-		var dropped_item = wieldable_res.item_scene.instantiate()
-		#dropped_item.gun_res = wieldable_res
-		dropped_item.set_item_resource(wieldable_res)
+	print_debug("before drop: ", slots, " curr_slot: ", curr_slot)
+	if curr_equipped:
+		slots[curr_slot] = null
+		#Temporary, may replace with global GameManager.spawn_item(item_res, init_velocity)
+		var dropped_item = curr_equipped.item_scene.instantiate() as RigidBody3D
+		dropped_item.set_item_resource(curr_equipped)
 		dropped_item.global_position = hand.global_position
+		var hand_forward_vec = -hand.global_transform.basis.z.normalized()
+		dropped_item.apply_force(hand_forward_vec * throw_force)
 		get_tree().root.get_child(0).add_child(dropped_item)
-	
-		if curr_slot > 0:
-			curr_slot -= 1
-		print_debug("after drop: ", slots, " curr_slot: ", curr_slot)
-		render_curr_slot()
+		update_curr_equipped()
+	print_debug("after drop: ", slots, " curr_slot: ", curr_slot)
 
-func render_curr_slot():
-	if curr_equipped_model != null:
-		curr_equipped_model.queue_free()
-	if not slots.is_empty() and get_curr_equipped():
-		var curr_equipped = get_curr_equipped() as WieldableResource
+
+# Update curr_equipped and render it infront of player.
+func update_curr_equipped():
+	curr_equipped = slots[curr_slot]
+	if curr_equipped:
 		curr_equipped_model = curr_equipped.equipped_model.instantiate()
 		hand.add_child(curr_equipped_model)
+	elif curr_equipped_model != null:
+		curr_equipped_model.queue_free()
 
-func get_curr_equipped() -> WieldableResource:
-	return slots[curr_slot]
-
+# Move curr_slot up a slot. If at the last slot, loop back to first slot.
+# render_curr_slot.
 func inc_slot():
-	curr_slot += 1
-	print_debug("Holding a ", get_curr_equipped().name)
+	if curr_slot == last_slot():
+		curr_slot = first_slot()
+	else:
+		curr_slot += 1
+	update_curr_equipped()
+	print_debug("Holding a ", curr_equipped.name)
 
+# Move curr_slot down a slot. If at the first slot, loop back to last slot.
+# render_curr_slot.
 func dec_slot():
-	curr_slot -= 1
-	print_debug("Holding a ", get_curr_equipped().name)
+	if curr_slot == first_slot():
+		curr_slot = last_slot()
+	else:
+		curr_slot -= 1
+	update_curr_equipped()	
+	print_debug("Holding a ", curr_equipped.name)
 
 func select_slot(slot_num: int):
-	assert(slot_num >= 0 and slot_num < slots.size() - 1)
+	assert(slot_num >= first_slot() and slot_num < last_slot())
 	curr_slot = slot_num
-	print_debug("Holding a ", get_curr_equipped().name)
+	update_curr_equipped()
+	print_debug("Holding a ", curr_equipped.name)
+	
 
+func last_slot() -> int:
+	return slots.size() - 1
+
+func first_slot() -> int:
+	return 0
