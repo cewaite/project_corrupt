@@ -40,8 +40,9 @@ input_comp = NodePath("../../Controllers/PlayerInputComponent")
 
 [node name="Utility" type="Node" parent="."]
 
-[node name="InventoryComponent" type="Node" parent="Utility" node_paths=PackedStringArray("player_input_comp", "hand")]
+[node name="InventoryComponent" type="Node" parent="Utility" node_paths=PackedStringArray("parent", "player_input_comp", "hand")]
 script = ExtResource("4_6xs5b")
+parent = NodePath("../..")
 player_input_comp = NodePath("../../Controllers/PlayerInputComponent")
 hand = NodePath("../../Head/Camera/Hand")
 max_slots = 2

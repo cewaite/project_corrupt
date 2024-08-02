@@ -4,8 +4,9 @@ class_name Item extends RigidBody3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var model_instance = item_res.model.instantiate()
-	add_child(model_instance)
+	#var model_instance = item_res.model.instantiate()
+	#add_child(model_instance)
+	pass
 
 func get_item_resource():
 	return item_res

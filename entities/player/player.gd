@@ -24,7 +24,7 @@ const BOB_FREQ_CROUCH = 0.8
 
 # FOV Variables
 const BASE_FOV = 75.0
-const FOV_CHANGE = 1.5
+const FOV_CHANGE = 1.2
 
 # Collider & Camera height variables
 const COLLIDER_HEIGHT_WALK = 2
