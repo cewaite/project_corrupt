@@ -14,6 +14,7 @@ func interact(player):
 	on_item_pickup(player)
 
 func on_item_pickup(body):
+	freeze = true
 	if body.has_meta("InventoryComponent"):
 		var inv_comp = body.get_meta("InventoryComponent") as InventoryComponent
 		inv_comp.pickup_wieldable(get_item_resource())

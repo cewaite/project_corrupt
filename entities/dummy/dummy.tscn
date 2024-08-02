@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://sb6ym24rfkad"]
+[gd_scene load_steps=8 format=3 uid="uid://sb6ym24rfkad"]
 
 [ext_resource type="PackedScene" uid="uid://bextjj1hoo11r" path="res://assets/body.blend" id="1_duca2"]
+[ext_resource type="Script" path="res://entities/dummy/dummy.gd" id="1_ovlkl"]
 [ext_resource type="Script" path="res://components/health/hurtbox.gd" id="2_mu8gf"]
 [ext_resource type="Script" path="res://components/health/health_component.gd" id="3_etq5b"]
 
@@ -17,6 +18,7 @@ size = Vector3(0.188503, 0.415464, 0.1)
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
 collision_layer = 2
 collision_mask = 31
+script = ExtResource("1_ovlkl")
 
 [node name="body" parent="." instance=ExtResource("1_duca2")]
 transform = Transform3D(0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, 0, 0, 0)

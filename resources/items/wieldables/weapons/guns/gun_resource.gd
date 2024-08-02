@@ -10,6 +10,7 @@ extends WeaponResource
 
 @export_flags("Hitscan", "Projectile") var Type
 @export var projectile_scene: PackedScene 
+
 # @export var AmmoType: AmmoType (6.66mm, EnergyPack, etc.)
 # @export var fire_rate_comp: FireRateComponent (SemiComponent, FullAutoComponent, BurstComponent)
 

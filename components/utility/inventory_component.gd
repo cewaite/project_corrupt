@@ -1,7 +1,7 @@
 class_name InventoryComponent extends Component
 
 @export var parent: CharacterBody3D
-@export var player_input_comp: PlayerInputComponent
+@export var input_comp: InputComponent
 @export var hand: Node3D
 
 @export var slots: Array[WieldableResource]
@@ -22,9 +22,9 @@ func _ready():
 
 func _process(delta):
 	# TESTIN PURPOSES, move ot playerinputcomp
-	player_input_comp.handle_wieldable_inputs()
+	input_comp.handle_wieldable_inputs()
 	
-	if player_input_comp.get_drop_input():
+	if input_comp.get_drop_input():
 		drop_wieldable()
 
 func get_component_name() -> StringName: 
@@ -53,14 +53,12 @@ func drop_wieldable() -> void:
 	if curr_equipped:
 		slots[curr_slot] = null
 		#Temporary, may replace with global GameManager.spawn_item(item_res, init_velocity)
-		var dropped_item = curr_equipped.item_scene.instantiate() as RigidBody3D
+		var dropped_item = curr_equipped.scene.instantiate() as RigidBody3D
 		dropped_item.set_item_resource(curr_equipped)
 		get_tree().root.get_child(0).add_child(dropped_item)
 		dropped_item.global_position = hand.global_position
 		dropped_item.rotation = hand.rotation
 		var hand_forward_vec = hand.global_transform.basis.z.normalized()
-		print_debug(parent.velocity)
-		print_debug((hand_forward_vec * throw_force) + parent.velocity)
 		dropped_item.apply_force((hand_forward_vec * throw_force) + parent.velocity)
 		
 		update_curr_equipped()
@@ -71,7 +69,9 @@ func drop_wieldable() -> void:
 func update_curr_equipped():
 	curr_equipped = slots[curr_slot]
 	if curr_equipped:
-		curr_equipped_scene = curr_equipped.equipped_scene.instantiate()
+		curr_equipped_scene = curr_equipped.scene.instantiate() as RigidBody3D
+		curr_equipped_scene.set_item_resource(curr_equipped)
+		curr_equipped_scene.freeze = true
 		hand.add_child(curr_equipped_scene)
 	elif curr_equipped_scene != null:
 		curr_equipped_scene.queue_free()

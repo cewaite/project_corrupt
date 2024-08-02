@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://exl64ox85q1"]
 
 [ext_resource type="PackedScene" uid="uid://t8sono4advwa" path="res://entities/player/player.tscn" id="2_k07xf"]
-[ext_resource type="PackedScene" uid="uid://sb6ym24rfkad" path="res://entities/dummy.tscn" id="2_qhm4y"]
-[ext_resource type="PackedScene" uid="uid://c0jacunf4gsjp" path="res://items/wieldables/weapons/guns/slingshot/slingshot_item.tscn" id="4_oepi6"]
+[ext_resource type="PackedScene" uid="uid://sb6ym24rfkad" path="res://entities/dummy/dummy.tscn" id="2_qhm4y"]
+[ext_resource type="PackedScene" uid="uid://c0jacunf4gsjp" path="res://items/wieldables/weapons/guns/slingshot/slingshot.tscn" id="4_oepi6"]
 [ext_resource type="Resource" uid="uid://cluioy22ebgxv" path="res://items/wieldables/weapons/guns/slingshot/slingshot.tres" id="5_0dqd1"]
 [ext_resource type="PackedScene" uid="uid://wwqhmf2tgxbb" path="res://scenes/player_hud/player_hud.tscn" id="5_wrlyo"]
 

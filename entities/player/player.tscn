@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://t8sono4advwa"]
+[gd_scene load_steps=10 format=3 uid="uid://t8sono4advwa"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_5eyay"]
 [ext_resource type="Script" path="res://components/input/player_input_component.gd" id="1_ndjuu"]
 [ext_resource type="Script" path="res://components/movement/move_component.gd" id="2_36bhi"]
 [ext_resource type="Script" path="res://components/movement/jump_component.gd" id="3_qxy82"]
 [ext_resource type="Script" path="res://components/utility/inventory_component.gd" id="4_6xs5b"]
+[ext_resource type="Script" path="res://components/utility/attack_component.gd" id="6_ckekw"]
 [ext_resource type="PackedScene" uid="uid://cjl6g56i2b8o7" path="res://components/utility/player_interact_component/player_interact_component.tscn" id="7_ce0qx"]
 [ext_resource type="PackedScene" uid="uid://0iabl60bscqx" path="res://components/utility/aim_component/aim_component.tscn" id="8_db6ne"]
 
@@ -40,12 +41,18 @@ input_comp = NodePath("../../Controllers/PlayerInputComponent")
 
 [node name="Utility" type="Node" parent="."]
 
-[node name="InventoryComponent" type="Node" parent="Utility" node_paths=PackedStringArray("parent", "player_input_comp", "hand")]
+[node name="InventoryComponent" type="Node" parent="Utility" node_paths=PackedStringArray("parent", "input_comp", "hand")]
 script = ExtResource("4_6xs5b")
 parent = NodePath("../..")
-player_input_comp = NodePath("../../Controllers/PlayerInputComponent")
+input_comp = NodePath("../../Controllers/PlayerInputComponent")
 hand = NodePath("../../Head/Camera/Hand")
 max_slots = 2
+
+[node name="AttackComponent" type="Node" parent="Utility" node_paths=PackedStringArray("input_comp", "inv_comp", "aim_comp")]
+script = ExtResource("6_ckekw")
+input_comp = NodePath("../../Controllers/PlayerInputComponent")
+inv_comp = NodePath("../InventoryComponent")
+aim_comp = NodePath("../../Head/Camera/AimComponent")
 
 [node name="Collider" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_cfpqj")
