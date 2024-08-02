@@ -37,23 +37,23 @@ func pickup_wieldable(wieldable_res) -> void:
 	render_curr_slot()
 	
 
-func drop_wieldable() -> WieldableResource:
-	print_debug("before drop: ", slots, " curr_slot: ", curr_slot)
-	var wieldable_res = slots.pop_at(curr_slot) as WieldableResource
+func drop_wieldable() -> void:
+	if get_curr_equipped():
+		print_debug("before drop: ", slots, " curr_slot: ", curr_slot)
+		var wieldable_res = slots.pop_at(curr_slot) as WieldableResource
+		
+		# Temporary, want gun or weapon or item manager to do this since it requires view into root node
+		print_debug(wieldable_res.name)
+		var dropped_item = wieldable_res.item_scene.instantiate()
+		#dropped_item.gun_res = wieldable_res
+		dropped_item.set_item_resource(wieldable_res)
+		dropped_item.global_position = hand.global_position
+		get_tree().root.get_child(0).add_child(dropped_item)
 	
-	# Temporary, want gun or weapon or item manager to do this since it requires view into root node
-	print_debug(wieldable_res.name)
-	var dropped_item = wieldable_res.item_scene.instantiate()
-	#dropped_item.gun_res = wieldable_res
-	dropped_item.set_item_resource(wieldable_res)
-	dropped_item.global_position = hand.global_position
-	get_tree().root.get_child(0).add_child(dropped_item)
-	
-	if curr_slot > 0:
-		curr_slot -= 1
-	print_debug("after drop: ", slots, " curr_slot: ", curr_slot)
-	render_curr_slot()
-	return wieldable_res
+		if curr_slot > 0:
+			curr_slot -= 1
+		print_debug("after drop: ", slots, " curr_slot: ", curr_slot)
+		render_curr_slot()
 
 func render_curr_slot():
 	if curr_equipped_model != null:
