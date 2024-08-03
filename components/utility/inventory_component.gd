@@ -26,6 +26,12 @@ func _process(delta):
 	
 	if input_comp.get_drop_input():
 		drop_wieldable()
+	
+	if input_comp is PlayerInputComponent:
+		if input_comp.get_inc_wieldable():
+			inc_slot()
+		if input_comp.get_dec_wieldable():
+			dec_slot()
 
 func get_component_name() -> StringName: 
 	return "InventoryComponent"
@@ -61,14 +67,16 @@ func drop_wieldable() -> void:
 		var hand_forward_vec = hand.global_transform.basis.z.normalized()
 		dropped_item.apply_force((hand_forward_vec * throw_force) + parent.velocity)
 		dropped_item.reset_collision_layer()
-		
-		
+
 		update_curr_equipped()
 	#print_debug("after drop: ", slots, " curr_slot: ", curr_slot)
 
 
 # Update curr_equipped and render it infront of player.
 func update_curr_equipped():
+	if curr_equipped_scene != null:
+		curr_equipped_scene.queue_free()
+	
 	curr_equipped = slots[curr_slot]
 	if curr_equipped:
 		curr_equipped_scene = curr_equipped.scene.instantiate() as RigidBody3D
@@ -76,8 +84,7 @@ func update_curr_equipped():
 		curr_equipped_scene.freeze = true
 		curr_equipped_scene.clear_collision_layer()
 		hand.add_child(curr_equipped_scene)
-	elif curr_equipped_scene != null:
-		curr_equipped_scene.queue_free()
+	
 
 # Move curr_slot up a slot. If at the last slot, loop back to first slot.
 # render_curr_slot.
@@ -96,11 +103,11 @@ func dec_slot():
 		curr_slot = last_slot()
 	else:
 		curr_slot -= 1
-	update_curr_equipped()	
+	update_curr_equipped()
 	#print_debug("Holding a ", curr_equipped.name)
 
 func select_slot(slot_num: int):
-	assert(slot_num >= first_slot() and slot_num < last_slot())
+	assert(slot_num >= first_slot() and slot_num <= last_slot())
 	curr_slot = slot_num
 	update_curr_equipped()
 	#print_debug("Holding a ", curr_equipped.name)

@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://bat5o1wmiks71"]
+
+[ext_resource type="Script" path="res://items/wieldables/weapons/guns/gun/gun.gd" id="1_8tdxw"]
+[ext_resource type="PackedScene" uid="uid://c4h88dlbepqh" path="res://assets/guns/laser_carbine.blend" id="1_pfvao"]
+[ext_resource type="Script" path="res://components/utility/interactable_component.gd" id="2_h078i"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7exh4"]
+radius = 0.09
+height = 1.54
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cuouj"]
+size = Vector3(0.115, 0.209482, 0.370605)
+
+[node name="PowerTube" type="RigidBody3D" node_paths=PackedStringArray("barrel_point")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.0221557, 0, 0)
+collision_layer = 36
+collision_mask = 16
+script = ExtResource("1_8tdxw")
+barrel_point = NodePath("BarrelPoint")
+
+[node name="laser_carbine" parent="." instance=ExtResource("1_pfvao")]
+
+[node name="BodyCollider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.0221058, 0.0939177, 0.0158278)
+shape = SubResource("CapsuleShape3D_7exh4")
+
+[node name="HandleCollider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.015, -0.0832471, 0.314697)
+shape = SubResource("BoxShape3D_cuouj")
+
+[node name="InteractableComponent" type="Node" parent="." node_paths=PackedStringArray("parent")]
+script = ExtResource("2_h078i")
+parent = NodePath("..")
+
+[node name="BarrelPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.02, 0.093, -0.483)

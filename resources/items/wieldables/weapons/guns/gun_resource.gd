@@ -11,6 +11,7 @@ enum FIRE_TYPE {HITSCAN, PROJECTILE}
 @export var spread: float
 @export var reload_speed: float
 @export var fire_mode: FIRE_MODE
+@export var fire_rate: float
 @export var fire_type: FIRE_TYPE
 @export var projectile_scene: PackedScene 
 
@@ -18,6 +19,7 @@ enum FIRE_TYPE {HITSCAN, PROJECTILE}
 # @export var fire_rate_comp: FireRateComponent (SemiComponent, FullAutoComponent, BurstComponent)
 
 var curr_ammo: int
+var curr_fire_rate_timer: float
 
 func shoot():
 	curr_ammo -= 1
@@ -30,3 +32,9 @@ func reload():
 
 func has_ammo() -> bool:
 	return curr_ammo > 0
+
+func is_projectile():
+	return fire_type == FIRE_TYPE.PROJECTILE
+
+func is_hitscan():
+	fire_type == FIRE_TYPE.HITSCAN

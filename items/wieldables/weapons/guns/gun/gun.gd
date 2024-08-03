@@ -1,9 +1,12 @@
 class_name Gun extends Weapon
 
 @export var anim_player: AnimationPlayer
+@export var barrel_point: Node3D #ONLY NEEDED FOR PROJECTILE WEAPONS
 
 var gun_res: GunResource
 var shooting: bool = false
+
+# For storing the users aim component
 var aim_comp: AimComponent
 
 func _ready():
@@ -29,20 +32,37 @@ func primary_use_released():
 
 func shoot():
 	if gun_res.has_ammo():
-		if anim_player.is_playing():
-			anim_player.stop()
-		anim_player.play("shoot")
+		if anim_player:
+			if anim_player.is_playing():
+				anim_player.stop()
+			anim_player.play("shoot")
 		gun_res.shoot()
 		var collision_dict = aim_comp.fire_ray()
-		var collider = collision_dict["collider"]
-		if collider is HurtBox:
-			var hurtbox = collider as HurtBox
-			var health_comp = hurtbox.health_comp as HealthComponent
-			health_comp.take_damage(gun_res.damage)
+		if gun_res.is_projectile():
+			spawn_projectile(collision_dict)
+		elif gun_res.is_hitscan():
+			var collider = collision_dict["collider"]
+			if collider is HurtBox:
+				var hurtbox = collider as HurtBox
+				var health_comp = hurtbox.health_comp as HealthComponent
+				health_comp.take_damage(gun_res.damage)
+	else:
+		print_debug("OUT OF AMMO")
 
 func reload():
-	anim_player.play("reload")
+	if anim_player:
+		anim_player.play("reload")
 	gun_res.reload()
 
-#func set_item_resource(res):
-	#gun_res = res
+func spawn_projectile(collision_dict):
+	var collider = collision_dict["collider"]
+	var collision_point = collision_dict["collision_point"]
+	var projectile = gun_res.projectile_scene.instantiate()
+	projectile.position = barrel_point.position
+	projectile.set_damage(gun_res.damage)
+	
+	if collider:
+		projectile.direction = barrel_point.global_position.direction_to(collision_point) # - collision_dict["collision_point"]
+	else:
+		projectile.direction = -barrel_point.get_global_transform().basis.z
+	add_child(projectile)

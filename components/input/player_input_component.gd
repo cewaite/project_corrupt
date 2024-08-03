@@ -5,6 +5,8 @@ class_name PlayerInputComponent extends InputComponent
 
 var crouch_input: bool	## Detect if Player is crouching
 var direction_input: Vector3
+var inc_wieldable: bool
+var dec_wieldable: bool
 
 func handle_move_inputs(delta):
 	move_input = Input.get_vector("left", "right", "forward", "back")
@@ -19,6 +21,8 @@ func handle_wieldable_inputs():
 	primary_input_released = Input.is_action_just_released("primary_action")
 	secondary_input_released = Input.is_action_just_released("secondary_action")
 	reload_input = Input.is_action_just_pressed("reload")
+	inc_wieldable = Input.is_action_just_pressed("next_wieldable")
+	dec_wieldable = Input.is_action_just_pressed("prev_wieldable")
 
 func handle_interact_input():
 	interact_input = Input.is_action_just_released("interact")
@@ -31,3 +35,9 @@ func get_direction_input() -> Vector3:
 
 func get_height_ray() -> RayCast3D:
 	return height_ray
+
+func get_inc_wieldable() -> bool:
+	return inc_wieldable
+
+func get_dec_wieldable() -> bool:
+	return dec_wieldable

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="GunResource" load_steps=4 format=3 uid="uid://c8enyqf3pskg6"]
+
+[ext_resource type="PackedScene" uid="uid://kpkiyneufmm5" path="res://prefabs/laser_projectile/laser_projectile.tscn" id="1_by7i1"]
+[ext_resource type="Script" path="res://resources/items/wieldables/weapons/guns/gun_resource.gd" id="1_gu2tg"]
+[ext_resource type="PackedScene" uid="uid://bat5o1wmiks71" path="res://items/wieldables/weapons/guns/power_tube/power_tube.tscn" id="2_sr0vi"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_gu2tg")
+max_ammo = 45
+spread = 0.0
+reload_speed = 0.0
+fire_mode = 0
+fire_rate = 0.0
+fire_type = 1
+projectile_scene = ExtResource("1_by7i1")
+damage = 5
+scrap_price = 15
+name = "Power Tube"
+scene = ExtResource("2_sr0vi")
