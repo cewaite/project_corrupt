@@ -113,3 +113,4 @@ drop={
 3d_physics/layer_6="Interactables"
 3d_physics/layer_7="Hitbox"
 3d_physics/layer_8="Hurtbox"
+3d_physics/layer_9="Pushables"

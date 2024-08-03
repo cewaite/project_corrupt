@@ -60,6 +60,8 @@ func drop_wieldable() -> void:
 		dropped_item.rotation = hand.rotation
 		var hand_forward_vec = hand.global_transform.basis.z.normalized()
 		dropped_item.apply_force((hand_forward_vec * throw_force) + parent.velocity)
+		dropped_item.reset_collision_layer()
+		
 		
 		update_curr_equipped()
 	#print_debug("after drop: ", slots, " curr_slot: ", curr_slot)
@@ -72,6 +74,7 @@ func update_curr_equipped():
 		curr_equipped_scene = curr_equipped.scene.instantiate() as RigidBody3D
 		curr_equipped_scene.set_item_resource(curr_equipped)
 		curr_equipped_scene.freeze = true
+		curr_equipped_scene.clear_collision_layer()
 		hand.add_child(curr_equipped_scene)
 	elif curr_equipped_scene != null:
 		curr_equipped_scene.queue_free()

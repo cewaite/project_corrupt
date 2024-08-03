@@ -9,13 +9,16 @@ func get_component_name() -> StringName:
 
 func _physics_process(delta):
 	input_comp.handle_wieldable_inputs()
-	
+
 	var curr_equipped = inv_comp.curr_equipped_scene
 	if curr_equipped:
+		if input_comp.get_reload_input():
+			if curr_equipped.has_method("reload"):
+					curr_equipped.reload()
+		
 		if input_comp.get_primary_input_pressed():
 			if curr_equipped.has_method("primary_use_pressed"):
 				if curr_equipped is Gun:
-					print_debug("GOT HERE")
 					curr_equipped.primary_use_pressed(aim_comp)
 				else:
 					curr_equipped.primary_use_pressed()

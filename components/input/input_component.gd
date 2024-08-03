@@ -11,6 +11,7 @@ var primary_input_pressed: bool
 var secondary_input_pressed: bool
 var primary_input_released: bool
 var secondary_input_released: bool
+var reload_input: bool
 
 #/
 ## Return the Move Input float. 
@@ -40,13 +41,16 @@ func get_secondary_input_pressed() -> bool:
 	return secondary_input_pressed
 
 func get_primary_input_released() -> bool:
-	return primary_input_pressed
+	return primary_input_released
 
 func get_secondary_input_released() -> bool:
-	return secondary_input_pressed
+	return secondary_input_released
 
 func get_interact_input() -> bool:
 	return interact_input
 
 func get_drop_input() -> bool:
 	return drop_input
+
+func get_reload_input() -> bool:
+	return reload_input

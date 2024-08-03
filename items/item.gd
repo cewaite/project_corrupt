@@ -6,7 +6,7 @@ class_name Item extends RigidBody3D
 func _ready():
 	#var model_instance = item_res.model.instantiate()
 	#add_child(model_instance)
-	pass
+	assert(item_res, "%s should have an item resource" % name)
 
 func get_item_resource():
 	return item_res

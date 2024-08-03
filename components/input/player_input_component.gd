@@ -18,6 +18,7 @@ func handle_wieldable_inputs():
 	secondary_input_pressed = Input.is_action_just_pressed("secondary_action")
 	primary_input_released = Input.is_action_just_released("primary_action")
 	secondary_input_released = Input.is_action_just_released("secondary_action")
+	reload_input = Input.is_action_just_pressed("reload")
 
 func handle_interact_input():
 	interact_input = Input.is_action_just_released("interact")
