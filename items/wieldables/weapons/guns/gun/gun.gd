@@ -14,15 +14,23 @@ func _ready():
 	gun_res = item_res
 
 func _process(delta):
-	if shooting:
+	if shooting and gun_res.curr_fire_rate_timer <= 0.0:
 		shoot()
 		if gun_res.fire_mode == GunResource.FIRE_MODE.SEMI:
 			shooting = false
+		elif gun_res.fire_mode == GunResource.FIRE_MODE.FULL:
+			gun_res.curr_fire_rate_timer = gun_res.fire_rate
+	
+	if gun_res.fire_mode == GunResource.FIRE_MODE.FULL:
+		if gun_res.curr_fire_rate_timer > 0:
+			gun_res.curr_fire_rate_timer -= delta
+	
 
 func get_item_resource():
 	return gun_res
 
 func primary_use_pressed(aim_comp: AimComponent):
+	#gun_res.curr_fire_rate_timer = 0.0
 	self.aim_comp = aim_comp
 	shooting = true
 
@@ -57,12 +65,14 @@ func reload():
 func spawn_projectile(collision_dict):
 	var collider = collision_dict["collider"]
 	var collision_point = collision_dict["collision_point"]
-	var projectile = gun_res.projectile_scene.instantiate()
+	var projectile = gun_res.projectile_scene.instantiate() as RigidBody3D
 	projectile.position = barrel_point.position
+	projectile.projectile_velocity = gun_res.projectile_velocity
+	projectile.gravity_scale = gun_res.projectile_falloff
 	projectile.set_damage(gun_res.damage)
 	
 	if collider:
-		projectile.direction = barrel_point.global_position.direction_to(collision_point) # - collision_dict["collision_point"]
+		projectile.direction = barrel_point.global_position.direction_to(collision_point).normalized() # - collision_dict["collision_point"]
 	else:
 		projectile.direction = -barrel_point.get_global_transform().basis.z
 	add_child(projectile)

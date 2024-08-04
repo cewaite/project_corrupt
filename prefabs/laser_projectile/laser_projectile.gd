@@ -1,21 +1,23 @@
-extends Node3D
+class_name Projectile extends RigidBody3D
 
-const VELOCITY = 100.0
 @export var hitbox: HitBox
 @export var mesh: MeshInstance3D
 @export var particles: GPUParticles3D
 
-# Set this upon creating projectile
-var direction: Vector3
+var flying: bool = true
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
-	global_position += VELOCITY * direction * delta
+# Set these upon creating projectile
+var direction: Vector3
+var projectile_velocity: float
+
+func _ready():
+	set_linear_velocity(direction * projectile_velocity)
 
 func set_damage(val):
 	hitbox.damage = val
 
 func die():
+	flying = false
 	mesh.visible = false
 	particles.emitting = true
 	await get_tree().create_timer(1.0).timeout
@@ -23,3 +25,6 @@ func die():
 
 func _on_timer_timeout():
 	queue_free()
+
+func _on_body_entered(body):
+	die()
