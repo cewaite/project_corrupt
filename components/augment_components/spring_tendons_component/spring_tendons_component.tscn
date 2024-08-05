@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmvd3mh3fta3h"]
+
+[ext_resource type="Script" path="res://components/augment_components/spring_tendons_component/spring_tendons_component.gd" id="1_u5iq0"]
+
+[node name="SpringTendonsComponent" type="Node"]
+script = ExtResource("1_u5iq0")

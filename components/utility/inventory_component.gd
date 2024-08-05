@@ -63,7 +63,6 @@ func drop_wieldable() -> void:
 		dropped_item.set_item_resource(curr_equipped)
 		get_tree().root.get_child(0).add_child(dropped_item)
 		dropped_item.global_position = hand.global_position
-		dropped_item.rotation = hand.rotation
 		var hand_forward_vec = hand.global_transform.basis.z.normalized()
 		dropped_item.apply_force((hand_forward_vec * throw_force) + parent.velocity)
 		dropped_item.reset_collision_layer()

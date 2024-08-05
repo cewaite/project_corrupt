@@ -21,7 +21,7 @@ resources_spreadsheet_view/context_menu_on_leftclick=false
 [application]
 
 config/name="Project CORRUPT Demo"
-run/main_scene="res://scenes/demo_scene.tscn"
+run/main_scene="res://scenes/proto_level.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 

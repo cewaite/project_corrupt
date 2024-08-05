@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://dkwsd1ab8bxdq"]
+
+[ext_resource type="Script" path="res://items/augments/augment.gd" id="1_68ttb"]
+[ext_resource type="Script" path="res://components/utility/interactable_component.gd" id="1_gv8rk"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_lhjoi"]
+size = Vector3(0.4, 0.1, 0.4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qx7t0"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_4xnw5"]
+points = PackedVector3Array(0.185284, 0.05, 0.185284, -0.191261, -0.05, -0.191261, -0.191261, -0.05, 0.191261, 0.191261, -0.05, -0.191261, -0.185284, 0.05, -0.185284, 0.191261, -0.05, 0.191261, -0.185284, 0.05, 0.185284, 0.185284, 0.05, -0.185284)
+
+[node name="SpringTendons" type="RigidBody3D"]
+collision_layer = 36
+collision_mask = 16
+script = ExtResource("1_68ttb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_lhjoi")
+surface_material_override/0 = SubResource("StandardMaterial3D_qx7t0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_4xnw5")
+
+[node name="InteractableComponent" type="Node" parent="." node_paths=PackedStringArray("parent")]
+script = ExtResource("1_gv8rk")
+parent = NodePath("..")

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AugmentResource" load_steps=4 format=3 uid="uid://b7yjvcr06lap7"]
+
+[ext_resource type="PackedScene" uid="uid://bmvd3mh3fta3h" path="res://components/augment_components/spring_tendons_component/spring_tendons_component.tscn" id="1_8b5dl"]
+[ext_resource type="PackedScene" uid="uid://dkwsd1ab8bxdq" path="res://items/augments/spring_tendons/spring_tendons.tscn" id="1_dnd86"]
+[ext_resource type="Script" path="res://resources/items/augments/augment_resource.gd" id="1_k1jda"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_k1jda")
+component_scene = ExtResource("1_8b5dl")
+augment_type = 3
+name = "Spring Tendons"
+scene = ExtResource("1_dnd86")

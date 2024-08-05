@@ -1,7 +1,7 @@
 class_name JumpComponent
-extends Node
+extends Component
 
-@export var JUMP_VELOCITY = 6.0
+@export var JUMP_VELOCITY: float = 6.0
 
 @export_group("Nodes")
 @export var parent : CharacterBody3D	## Parent node that does any movement. 
@@ -22,6 +22,9 @@ const COYOTE_TIME_MAX = .1
 var curr_coyote_time = 0
 const JUMP_CD_MAX = .25
 var curr_jump_cd = 0
+
+func get_component_name() -> StringName: 
+	return "JumpComponent"
 
 func handle_jump(delta):
 	# Handle jump.
@@ -60,4 +63,4 @@ func handle_jump(delta):
 
 func modify_jump(jump_mults: Array[float]):
 	for multiplier in jump_mults:
-		JUMP_VELOCITY *= multiplayer
+		JUMP_VELOCITY *= multiplier

@@ -1,2 +1,1 @@
-class_name WieldableResource
-extends ItemResource
+class_name WieldableResource extends ItemResource

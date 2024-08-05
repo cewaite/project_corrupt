@@ -9,8 +9,8 @@ class_name Player extends CharacterBody3D
 @export var input_comp : InputComponent			## Player's input node. 
 @export var move_comp : MoveComponent		## Player's movement node. 
 @export var jump_comp : JumpComponent		## Player's jump node. 
-@export var inventory : InventoryComponent		## Player's inventory node. 
-@export var aim_comp: AimComponent
+#@export var inventory : InventoryComponent		## Player's inventory node. 
+#@export var aim_comp: AimComponent
 @export var push_comp: PushComponent
 
 const SENSITIVITY = 0.003
@@ -62,6 +62,7 @@ func _physics_process(delta):
 	
 	## Add in speed modifiers ##
 	move_comp.modify_speed([])
+	jump_comp.modify_jump([])
 	
 	## Handle move and jump velocities ##
 	move_comp.handle_move(delta)
