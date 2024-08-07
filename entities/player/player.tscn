@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://t8sono4advwa"]
+[gd_scene load_steps=12 format=3 uid="uid://t8sono4advwa"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_5eyay"]
 [ext_resource type="Script" path="res://components/input/player_input_component.gd" id="1_ndjuu"]
@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://cjl6g56i2b8o7" path="res://components/utility/player_interact_component/player_interact_component.tscn" id="7_ce0qx"]
 [ext_resource type="Script" path="res://components/augment_components/augment_manager_component.gd" id="8_bsj0i"]
 [ext_resource type="PackedScene" uid="uid://0iabl60bscqx" path="res://components/utility/aim_component/aim_component.tscn" id="8_db6ne"]
-[ext_resource type="Resource" uid="uid://b7yjvcr06lap7" path="res://items/augments/spring_tendons/spring_tendons.tres" id="9_u81g4"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cfpqj"]
 
@@ -63,12 +62,6 @@ parent = NodePath("../..")
 [node name="AugmentManagerComponent" type="Node" parent="Utility" node_paths=PackedStringArray("parent")]
 script = ExtResource("8_bsj0i")
 parent = NodePath("../..")
-augment_dict = {
-"ARMS": null,
-"BODY": null,
-"HEAD": null,
-"LEGS": ExtResource("9_u81g4")
-}
 
 [node name="Collider" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_cfpqj")
@@ -85,7 +78,7 @@ parent = NodePath("../../..")
 player_input_comp = NodePath("../../../Controllers/PlayerInputComponent")
 
 [node name="Hand" type="Node3D" parent="Head/Camera"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.395782, -0.295732, -0.835098)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.395782, -0.295732, -0.835098)
 
 [node name="HeightRayCast" type="RayCast3D" parent="."]
 transform = Transform3D(-1, 1.74846e-07, 0, -8.74228e-08, -2, 0, 0, 0, 1, 0, 0, 0)

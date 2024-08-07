@@ -64,3 +64,7 @@ func handle_jump(delta):
 func modify_jump(jump_mults: Array[float]):
 	for multiplier in jump_mults:
 		JUMP_VELOCITY *= multiplier
+
+func remove_jump_modifier(jump_mults: Array[float]):
+	for multiplier in jump_mults:
+		JUMP_VELOCITY /= multiplier

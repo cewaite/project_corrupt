@@ -12,7 +12,6 @@ height = 1.54
 size = Vector3(0.115, 0.209482, 0.370605)
 
 [node name="PowerTube" type="RigidBody3D" node_paths=PackedStringArray("barrel_point")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.0221557, 0, 0)
 collision_layer = 36
 collision_mask = 16
 script = ExtResource("1_8tdxw")
@@ -33,4 +32,4 @@ script = ExtResource("2_h078i")
 parent = NodePath("..")
 
 [node name="BarrelPoint" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.02, 0.093, -0.483)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.02, 0.093, -0.740198)
