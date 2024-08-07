@@ -29,8 +29,6 @@ var curr_max_speed : float = 0
 var curr_acc : float = 0
 var curr_dec : float = 0
 
-#func _ready():
-	#update_state()
 
 func handle_move(delta):
 	## Ensure speed calculations are using the correct state based on PlayerInputComp##
@@ -56,9 +54,6 @@ func handle_move(delta):
 	else:
 		parent.velocity.x = lerp(parent.velocity.x, direction.x * curr_max_speed, FALLING_CONTROL * delta)
 		parent.velocity.z = lerp(parent.velocity.z, direction.z * curr_max_speed, FALLING_CONTROL * delta)
-
-#func activate_move():
-	#parent.move_and_slide()
 
 func update_state():
 	if input_comp is PlayerInputComponent:

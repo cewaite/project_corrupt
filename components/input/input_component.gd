@@ -2,7 +2,8 @@
 class_name InputComponent extends Node
 
 var move_input : Vector2	## Vector2 for which direction on x and z to move
-var jump_input : bool	## True for jump, false otherwise. 
+var jump_input_pressed : bool	## True for jump pressed, false otherwise. 
+var jump_input_released : bool	## True for jump released, false otherwise. 
 
 var interact_input: bool
 
@@ -20,8 +21,12 @@ func get_move_input() -> Vector2:
 
 #/
 ## Return the Jump Input bool. 
-func get_jump_input() -> bool:
-	return jump_input
+func get_jump_input_pressed() -> bool:
+	return jump_input_pressed
+
+## Return the Jump Input bool. 
+func get_jump_input_released() -> bool:
+	return jump_input_released
 
 #/
 ## Base function to handle inputs. TO BE OVERWRITTEN

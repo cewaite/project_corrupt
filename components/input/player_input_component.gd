@@ -11,7 +11,8 @@ var dec_wieldable: bool
 func handle_move_inputs(delta):
 	move_input = Input.get_vector("left", "right", "forward", "back")
 	direction_input = (head.transform.basis * Vector3(move_input.x, 0, move_input.y)).normalized()
-	jump_input = Input.is_action_pressed("jump")
+	jump_input_pressed = Input.is_action_just_pressed("jump")
+	jump_input_released = Input.is_action_just_released("jump")
 	crouch_input = Input.is_action_pressed("crouch")
 
 func handle_wieldable_inputs():

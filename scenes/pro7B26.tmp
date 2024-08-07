@@ -26,13 +26,13 @@ sky = SubResource("Sky_pmvwj")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="Resource" id="Resource_jojy4"]
+[sub_resource type="Resource" id="Resource_t7elo"]
 resource_local_to_scene = true
 script = ExtResource("5_nirk2")
 name = "Medium Box"
 scene = ExtResource("4_hb5wx")
 
-[sub_resource type="Resource" id="Resource_an0gf"]
+[sub_resource type="Resource" id="Resource_51g4i"]
 resource_local_to_scene = true
 script = ExtResource("8_apqp4")
 max_ammo = 45
@@ -49,7 +49,7 @@ scrap_price = 15
 name = "Power Tube"
 scene = ExtResource("6_gmwvi")
 
-[sub_resource type="Resource" id="Resource_vfexw"]
+[sub_resource type="Resource" id="Resource_l4qrd"]
 resource_local_to_scene = true
 script = ExtResource("12_h4ucy")
 component_scene = ExtResource("11_umgp4")
@@ -57,7 +57,7 @@ augment_type = 3
 name = "Spring Tendons"
 scene = ExtResource("9_a57vq")
 
-[sub_resource type="Resource" id="Resource_488kb"]
+[sub_resource type="Resource" id="Resource_iefad"]
 resource_local_to_scene = true
 script = ExtResource("12_h4ucy")
 component_scene = ExtResource("11_umgp4")
@@ -65,7 +65,7 @@ augment_type = 3
 name = "Spring Tendons"
 scene = ExtResource("9_a57vq")
 
-[sub_resource type="Resource" id="Resource_7n1hk"]
+[sub_resource type="Resource" id="Resource_hrocn"]
 resource_local_to_scene = true
 script = ExtResource("8_apqp4")
 max_ammo = 4
@@ -97,56 +97,4 @@ collision_layer = 16
 collision_mask = 0
 
 [node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.30157, 0)
-size = Vector3(50, 10, 50)
-material = ExtResource("1_r3pvk")
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.98445, 0)
-operation = 2
-size = Vector3(48, 9.52734, 48)
-material = ExtResource("1_r3pvk")
-
-[node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.72937e-11, 1.26801, -2.86852)
-size = Vector3(15, 1.53601, 1.77994)
-material = ExtResource("1_r3pvk")
-
-[node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.78132, 2.19925, 2.51694)
-size = Vector3(2, 3, 2)
-
-[node name="CSGBox3D5" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.78132, 3.2269, 5.69447)
-size = Vector3(2, 5, 2)
-
-[node name="CSGBox3D6" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.4257, 2.79023, 5.52331)
-size = Vector3(5.33008, 0.366241, 3.50043)
-
-[node name="Player" parent="." instance=ExtResource("4_eoaty")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00940132, 2.48986, -0.0104785)
-
-[node name="UI" type="CanvasLayer" parent="."]
-
-[node name="PlayerHUD" parent="UI" instance=ExtResource("1_qqk3w")]
-
-[node name="BoxMedium" parent="." instance=ExtResource("4_hb5wx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.45344, 2.99333, 1.79641)
-item_res = SubResource("Resource_jojy4")
-
-[node name="PowerTube" parent="." instance=ExtResource("6_gmwvi")]
-transform = Transform3D(0.16065, -0.986642, 0.0269971, 0.987002, 0.160708, 8.62865e-08, -0.00433873, 0.0266462, 0.999636, 4.99468, 2.81347, -2.78903)
-item_res = SubResource("Resource_an0gf")
-
-[node name="SpringTendons" parent="." instance=ExtResource("9_a57vq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.54148, 1.22078, 1.53083)
-item_res = SubResource("Resource_vfexw")
-
-[node name="SpringTendons2" parent="." instance=ExtResource("9_a57vq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.54148, 1.22078, 2.58334)
-item_res = SubResource("Resource_488kb")
-
-[node name="Slingshot" parent="." instance=ExtResource("7_ty7xy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.96183, 2.72356, -2.69861)
-item_res = SubResource("Resource_7n1hk")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.30157, 

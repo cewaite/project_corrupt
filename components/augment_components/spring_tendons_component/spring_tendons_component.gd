@@ -16,5 +16,5 @@ func remove_component():
 	# undo what was done in apply component and self.queue_free()
 	if parent.has_meta("JumpComponent"):
 		print_debug("REMOVING SPRING TENDONS")
-		parent.get_meta("JumpComponent").remove_jump_modifier([jump_mult] as Array[float])
+		parent.get_meta("JumpComponent").modify_jump([1 / jump_mult] as Array[float])
 	queue_free()

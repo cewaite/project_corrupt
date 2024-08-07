@@ -28,11 +28,11 @@ func get_component_name() -> StringName:
 
 func handle_jump(delta):
 	# Handle jump.
-	if not input_comp.get_jump_input() and parent.velocity.y > 0.0:
+	if input_comp.get_jump_input_released() and parent.velocity.y > 0.0:
 		curr_jump_cd = 0
 		parent.velocity.y = lerp(parent.velocity.y, 0.0, JUMP_RELEASE_DEC * delta)
 		#velocity.y /= 2.0
-	elif curr_coyote_time > 0 and (input_comp.get_jump_input() or curr_jump_cd > 0):
+	elif curr_coyote_time > 0 and (input_comp.get_jump_input_pressed() or curr_jump_cd > 0):
 		parent.velocity.y = JUMP_VELOCITY
 		curr_jump_cd = JUMP_CD_MAX
 	
@@ -64,7 +64,3 @@ func handle_jump(delta):
 func modify_jump(jump_mults: Array[float]):
 	for multiplier in jump_mults:
 		JUMP_VELOCITY *= multiplier
-
-func remove_jump_modifier(jump_mults: Array[float]):
-	for multiplier in jump_mults:
-		JUMP_VELOCITY /= multiplier
