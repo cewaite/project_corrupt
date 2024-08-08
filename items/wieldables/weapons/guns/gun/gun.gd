@@ -54,6 +54,15 @@ func shoot():
 				var hurtbox = collider as HurtBox
 				var health_comp = hurtbox.health_comp as HealthComponent
 				health_comp.take_damage(gun_res.damage)
+			
+			var bullet_decal = gun_res.bullet_decal.instantiate()
+			var collision_point = collision_dict["collision_point"]
+			var collision_normal = collision_dict["collision_normal"]
+			collider.add_child(bullet_decal)
+			bullet_decal.global_position = collision_point
+			#safe_look_at(bullet_decal, collision_point + collision_normal)
+			bullet_decal.look_at(collision_point + collision_normal, Vector3.UP)
+			bullet_decal.look_at(collision_point + collision_normal, Vector3.RIGHT)
 	else:
 		print_debug("OUT OF AMMO")
 
@@ -76,3 +85,23 @@ func spawn_projectile(collision_dict):
 	else:
 		projectile.direction = -barrel_point.get_global_transform().basis.z
 	add_child(projectile)
+
+func safe_look_at(node : Node3D, target : Vector3) -> void:
+	var origin : Vector3 = node.global_transform.origin
+	var v_z := (origin - target).normalized()
+
+	# Just return if at same position
+	if origin == target:
+		return
+
+	# Find an up vector that we can rotate around
+	var up := Vector3.ZERO
+	for entry in [Vector3.UP, Vector3.RIGHT]:
+		var v_x : Vector3 = entry.cross(v_z).normalized()
+		if v_x.length() != 0:
+			up = entry
+			break
+
+	# Look at the target
+	if up != Vector3.ZERO:
+		node.look_at(target, up)

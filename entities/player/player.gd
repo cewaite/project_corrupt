@@ -45,7 +45,7 @@ var weapon_tilt_amount: float = 0.05
 var camera_tilt_amount: float = 0.05
 var curr_camera_height : float = 0
 var default_hand_pos: Vector3
-var mouse_input
+var mouse_input: Vector2
 #var curr_bob_amp = 0
 #var curr_bob_freq = 0
 

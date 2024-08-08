@@ -10,12 +10,16 @@ enum FIRE_TYPE {HITSCAN, PROJECTILE}
 @export var max_ammo: int
 @export var spread: float
 @export var reload_speed: float
+
 @export var fire_mode: FIRE_MODE
 @export var fire_rate: float
 @export var fire_type: FIRE_TYPE
+
 @export var projectile_scene: PackedScene
 @export var projectile_velocity: float
 @export var projectile_falloff: float
+
+@export var bullet_decal: PackedScene
 
 # @export var AmmoType: AmmoType (6.66mm, EnergyPack, etc.)
 # @export var fire_rate_comp: FireRateComponent (SemiComponent, FullAutoComponent, BurstComponent)
@@ -39,4 +43,4 @@ func is_projectile():
 	return fire_type == FIRE_TYPE.PROJECTILE
 
 func is_hitscan():
-	fire_type == FIRE_TYPE.HITSCAN
+	return fire_type == FIRE_TYPE.HITSCAN
