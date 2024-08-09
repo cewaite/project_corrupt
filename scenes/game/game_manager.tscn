@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://dyahcxk8m5w88"]
+
+[ext_resource type="Script" path="res://scenes/game/game_manager.gd" id="1_g3vnv"]
+[ext_resource type="PackedScene" uid="uid://t8sono4advwa" path="res://entities/player/player.tscn" id="2_eu3f7"]
+[ext_resource type="PackedScene" uid="uid://bi75d0urlsc5v" path="res://scenes/levels/proto_level.tscn" id="3_y3smc"]
+[ext_resource type="PackedScene" uid="uid://wwqhmf2tgxbb" path="res://scenes/player_hud/player_hud.tscn" id="4_xp4wi"]
+
+[node name="GameManager" type="Node3D" node_paths=PackedStringArray("player", "player_hud")]
+script = ExtResource("1_g3vnv")
+player = NodePath("Player")
+player_hud = NodePath("UI/PlayerHUD")
+
+[node name="ProtoLevel" parent="." instance=ExtResource("3_y3smc")]
+
+[node name="Player" parent="." instance=ExtResource("2_eu3f7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00940132, 2.48986, 2.79925)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="PlayerHUD" parent="UI" instance=ExtResource("4_xp4wi")]

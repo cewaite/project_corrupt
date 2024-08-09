@@ -1,7 +1,7 @@
 class_name Gun extends Weapon
 
 @export var anim_player: AnimationPlayer
-@export var barrel_point: Node3D #ONLY NEEDED FOR PROJECTILE WEAPONS
+@export var barrel_point: Node3D
 
 var gun_res: GunResource
 var shooting: bool = false
@@ -12,10 +12,15 @@ var aim_comp: AimComponent
 func _ready():
 	super()
 	gun_res = item_res
+	if not gun_res.curr_spread:
+		gun_res.curr_spread = gun_res.min_spread
+	if not gun_res.curr_ammo:
+		gun_res.curr_ammo = gun_res.max_ammo
 
 func _process(delta):
 	if shooting and gun_res.curr_fire_rate_timer <= 0.0:
 		shoot()
+		
 		if gun_res.fire_mode == GunResource.FIRE_MODE.SEMI:
 			shooting = false
 		elif gun_res.fire_mode == GunResource.FIRE_MODE.FULL:
@@ -25,17 +30,17 @@ func _process(delta):
 		if gun_res.curr_fire_rate_timer > 0:
 			gun_res.curr_fire_rate_timer -= delta
 	
+	gun_res.decrement_spread()
 
 func get_item_resource():
 	return gun_res
 
 func primary_use_pressed(aim_comp: AimComponent):
-	#gun_res.curr_fire_rate_timer = 0.0
-	self.aim_comp = aim_comp
+	if not self.aim_comp:
+		self.aim_comp = aim_comp
 	shooting = true
 
 func primary_use_released():
-	self.aim_comp = null
 	shooting = false
 
 func shoot():
@@ -45,24 +50,11 @@ func shoot():
 				anim_player.stop()
 			anim_player.play("shoot")
 		gun_res.shoot()
-		var collision_dict = aim_comp.fire_ray()
+		var collision_dict = aim_comp.fire_ray(gun_res.curr_spread)
 		if gun_res.is_projectile():
 			spawn_projectile(collision_dict)
 		elif gun_res.is_hitscan():
-			var collider = collision_dict["collider"]
-			if collider is HurtBox:
-				var hurtbox = collider as HurtBox
-				var health_comp = hurtbox.health_comp as HealthComponent
-				health_comp.take_damage(gun_res.damage)
-			
-			var bullet_decal = gun_res.bullet_decal.instantiate()
-			var collision_point = collision_dict["collision_point"]
-			var collision_normal = collision_dict["collision_normal"]
-			collider.add_child(bullet_decal)
-			bullet_decal.global_position = collision_point
-			#safe_look_at(bullet_decal, collision_point + collision_normal)
-			bullet_decal.look_at(collision_point + collision_normal, Vector3.UP)
-			bullet_decal.look_at(collision_point + collision_normal, Vector3.RIGHT)
+			fire_hitscan(collision_dict)
 	else:
 		print_debug("OUT OF AMMO")
 
@@ -86,22 +78,17 @@ func spawn_projectile(collision_dict):
 		projectile.direction = -barrel_point.get_global_transform().basis.z
 	add_child(projectile)
 
-func safe_look_at(node : Node3D, target : Vector3) -> void:
-	var origin : Vector3 = node.global_transform.origin
-	var v_z := (origin - target).normalized()
-
-	# Just return if at same position
-	if origin == target:
-		return
-
-	# Find an up vector that we can rotate around
-	var up := Vector3.ZERO
-	for entry in [Vector3.UP, Vector3.RIGHT]:
-		var v_x : Vector3 = entry.cross(v_z).normalized()
-		if v_x.length() != 0:
-			up = entry
-			break
-
-	# Look at the target
-	if up != Vector3.ZERO:
-		node.look_at(target, up)
+func fire_hitscan(collision_dict):
+	var collider = collision_dict["collider"]
+	if collider is HurtBox:
+		var hurtbox = collider as HurtBox
+		var health_comp = hurtbox.health_comp as HealthComponent
+		health_comp.take_damage(gun_res.damage * hurtbox.damaga_mult)
+	
+	if collider:
+		var bullet_decal = gun_res.bullet_decal.instantiate()
+		var collision_point = collision_dict["collision_point"]
+		var collision_normal = collision_dict["collision_normal"]
+		collider.add_child(bullet_decal)
+		bullet_decal.global_position = collision_point
+		bullet_decal.look_at(collision_point + collision_normal, Vector3.ONE)

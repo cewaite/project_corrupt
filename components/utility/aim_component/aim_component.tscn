@@ -8,6 +8,6 @@ script = ExtResource("1_6do5g")
 aim_ray = NodePath("GunRayCast")
 
 [node name="GunRayCast" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-06, -1, 0, 100, -4.37114e-08, 0, 0.608581, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-06, -1, 0, 100, -4.37114e-08, 0, 0, 0)
 collision_mask = 412
 collide_with_areas = true

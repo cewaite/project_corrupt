@@ -1,5 +1,7 @@
 class_name Player extends CharacterBody3D
 
+signal equipped_wieldable_changed(new_gun_res)
+
 @onready var head = $Head
 @onready var camera = $Head/Camera
 @onready var hand = $Head/Camera/Hand
@@ -11,6 +13,7 @@ class_name Player extends CharacterBody3D
 @export var move_comp : MoveComponent		## Player's movement node. 
 @export var jump_comp : JumpComponent		## Player's jump node. 
 @export var push_comp: PushComponent
+@export var inv_comp: InventoryComponent
 
 const SENSITIVITY = 0.003
 
@@ -59,7 +62,7 @@ func _input(event):
 		mouse_input = event.relative
 		head.rotate_y(-event.relative.x * SENSITIVITY)
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
-		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-89), deg_to_rad(89))
+		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-80), deg_to_rad(80))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
@@ -81,7 +84,6 @@ func _physics_process(delta):
 	push_comp.apply_push()
 	
 	move_and_slide()
-
 
 #func head_bob(delta):
 	## Head Bob; Problem: Head stays in bob pos when not movie, want it to return to normal height
@@ -145,6 +147,3 @@ func _UpdateCollider():
 			collider.position.y = COLLIDER_HEIGHT_CROUCH / 2.0
 			#curr_bob_freq = BOB_FREQ_CROUCH
 			#curr_bob_amp = BOB_AMP_CROUCH
-
-func on_item_pick_up(item):
-	print_debug("I picked up a ", item.name)

@@ -5,8 +5,11 @@ class_name AimComponent extends Component
 func get_component_name() -> StringName: 
 	return "AimComponent"
 
-func fire_ray() -> Dictionary:
+func fire_ray(spread_radius: float) -> Dictionary:
 	if aim_ray:
+		print_debug(aim_ray.position)
+		aim_ray.position = Vector3(randf_range(-spread_radius / 200, spread_radius / 200), randf_range(-spread_radius / 200, spread_radius / 200), 0)
+		print_debug(aim_ray.position)
 		aim_ray.force_raycast_update()
 		return {
 			"collider" : aim_ray.get_collider(), 

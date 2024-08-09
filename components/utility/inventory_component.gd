@@ -1,5 +1,7 @@
 class_name InventoryComponent extends Component
 
+signal equipped_wieldable_changed(new_res)
+
 @export var parent: CharacterBody3D
 @export var input_comp: InputComponent
 @export var hand: Node3D
@@ -83,7 +85,7 @@ func update_curr_equipped():
 		curr_equipped_scene.freeze = true
 		curr_equipped_scene.clear_collision_layer()
 		hand.add_child(curr_equipped_scene)
-	
+	equipped_wieldable_changed.emit(curr_equipped)
 
 # Move curr_slot up a slot. If at the last slot, loop back to first slot.
 # render_curr_slot.
