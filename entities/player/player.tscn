@@ -73,7 +73,6 @@ shape = SubResource("CapsuleShape3D_cfpqj")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.608581, 0)
 
 [node name="AimComponent" parent="Head/Camera" instance=ExtResource("8_db6ne")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00793767, 0)
 
 [node name="PlayerInteractComponent" parent="Head/Camera" node_paths=PackedStringArray("parent", "player_input_comp") instance=ExtResource("7_ce0qx")]
 parent = NodePath("../../..")

@@ -10,10 +10,11 @@ size = Vector3(0.05, 0.635, 0.103)
 [sub_resource type="BoxShape3D" id="BoxShape3D_yxlqo"]
 size = Vector3(0.05, 0.2, 0.271484)
 
-[node name="Slingshot" type="RigidBody3D"]
+[node name="Slingshot" type="RigidBody3D" node_paths=PackedStringArray("barrel_point")]
 collision_layer = 36
 collision_mask = 16
 script = ExtResource("1_gchq7")
+barrel_point = NodePath("BarrelPoint")
 
 [node name="slingshot_proprotional" parent="." instance=ExtResource("2_fcabw")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
@@ -29,3 +30,6 @@ shape = SubResource("BoxShape3D_yxlqo")
 [node name="InteractableComponent" type="Node" parent="." node_paths=PackedStringArray("parent")]
 script = ExtResource("3_vjmyb")
 parent = NodePath("..")
+
+[node name="BarrelPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.360369)

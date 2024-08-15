@@ -1,13 +1,14 @@
-[gd_scene load_steps=18 format=3 uid="uid://bi75d0urlsc5v"]
+[gd_scene load_steps=21 format=3 uid="uid://bi75d0urlsc5v"]
 
 [ext_resource type="Material" uid="uid://cb57ptx8jr8yw" path="res://assets/proto_textures/dark/proto_texture2_dark.tres" id="1_r3pvk"]
 [ext_resource type="PackedScene" uid="uid://d0wwu141dggj0" path="res://items/wieldables/boxes/box_medium/box_medium.tscn" id="4_hb5wx"]
-[ext_resource type="Resource" uid="uid://c8enyqf3pskg6" path="res://items/wieldables/weapons/guns/power_tube/power_tube.tres" id="5_3stgl"]
+[ext_resource type="PackedScene" uid="uid://kpkiyneufmm5" path="res://prefabs/laser_projectile/laser_projectile.tscn" id="5_7ryn5"]
 [ext_resource type="Script" path="res://resources/items/wieldables/wieldable_resource.gd" id="5_nirk2"]
 [ext_resource type="PackedScene" uid="uid://bat5o1wmiks71" path="res://items/wieldables/weapons/guns/power_tube/power_tube.tscn" id="6_gmwvi"]
+[ext_resource type="Script" path="res://resources/items/wieldables/weapons/guns/gun_resource.gd" id="6_n2orn"]
 [ext_resource type="PackedScene" uid="uid://c0jacunf4gsjp" path="res://items/wieldables/weapons/guns/slingshot/slingshot.tscn" id="7_ty7xy"]
 [ext_resource type="PackedScene" uid="uid://dkwsd1ab8bxdq" path="res://items/augments/spring_tendons/spring_tendons.tscn" id="9_a57vq"]
-[ext_resource type="Resource" uid="uid://cluioy22ebgxv" path="res://items/wieldables/weapons/guns/slingshot/slingshot.tres" id="11_djmkk"]
+[ext_resource type="PackedScene" uid="uid://bpgtk4weo3sgh" path="res://prefabs/666_mm_bullet_terrain_decal.tscn" id="11_4dxrs"]
 [ext_resource type="PackedScene" uid="uid://sb6ym24rfkad" path="res://entities/dummy/dummy.tscn" id="11_n4n76"]
 [ext_resource type="PackedScene" uid="uid://bmvd3mh3fta3h" path="res://components/augment_components/spring_tendons_component/spring_tendons_component.tscn" id="11_umgp4"]
 [ext_resource type="Script" path="res://resources/items/augments/augment_resource.gd" id="12_h4ucy"]
@@ -25,13 +26,33 @@ sky = SubResource("Sky_pmvwj")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="Resource" id="Resource_vh86d"]
+[sub_resource type="Resource" id="Resource_gro0j"]
 resource_local_to_scene = true
 script = ExtResource("5_nirk2")
 name = "Medium Box"
 scene = ExtResource("4_hb5wx")
 
-[sub_resource type="Resource" id="Resource_ramb6"]
+[sub_resource type="Resource" id="Resource_bta1e"]
+resource_local_to_scene = true
+script = ExtResource("6_n2orn")
+max_ammo = 20
+reload_speed = 0.0
+min_spread = 1.0
+max_spread = 40.0
+spread_inc_rate = 10.0
+spread_dec_rate = 0.1
+fire_mode = 2
+fire_rate = 0.2
+fire_type = 1
+projectile_scene = ExtResource("5_7ryn5")
+projectile_velocity = 100.0
+projectile_falloff = 0.0
+damage = 10
+scrap_price = 500
+name = "Power Tube"
+scene = ExtResource("6_gmwvi")
+
+[sub_resource type="Resource" id="Resource_qtkkr"]
 resource_local_to_scene = true
 script = ExtResource("12_h4ucy")
 component_scene = ExtResource("11_umgp4")
@@ -39,13 +60,33 @@ augment_type = 3
 name = "Spring Tendons"
 scene = ExtResource("9_a57vq")
 
-[sub_resource type="Resource" id="Resource_qthbe"]
+[sub_resource type="Resource" id="Resource_tydd0"]
 resource_local_to_scene = true
 script = ExtResource("12_h4ucy")
 component_scene = ExtResource("11_umgp4")
 augment_type = 3
 name = "Spring Tendons"
 scene = ExtResource("9_a57vq")
+
+[sub_resource type="Resource" id="Resource_a5cc3"]
+resource_local_to_scene = true
+script = ExtResource("6_n2orn")
+max_ammo = 4
+reload_speed = 0.0
+min_spread = 1.0
+max_spread = 40.0
+spread_inc_rate = 20.0
+spread_dec_rate = 0.2
+fire_mode = 0
+fire_rate = 0.0
+fire_type = 0
+projectile_velocity = 0.0
+projectile_falloff = 0.0
+bullet_decal = ExtResource("11_4dxrs")
+damage = 25
+scrap_price = 100
+name = "Slingshot_v52843643.3"
+scene = ExtResource("7_ty7xy")
 
 [node name="ProtoLevel" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.14713e-05, -4.76837e-07, 0.0177498)
@@ -92,23 +133,23 @@ size = Vector3(5.33008, 0.366241, 3.50043)
 
 [node name="BoxMedium" parent="." instance=ExtResource("4_hb5wx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.45344, 2.99333, 1.79641)
-item_res = SubResource("Resource_vh86d")
+item_res = SubResource("Resource_gro0j")
 
 [node name="PowerTube" parent="." instance=ExtResource("6_gmwvi")]
 transform = Transform3D(0.16065, -0.986642, 0.0269971, 0.987002, 0.160708, 8.62865e-08, -0.00433873, 0.0266462, 0.999636, 4.99468, 2.81347, -2.78903)
-item_res = ExtResource("5_3stgl")
+item_res = SubResource("Resource_bta1e")
 
 [node name="SpringTendons" parent="." instance=ExtResource("9_a57vq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.54148, 1.22078, 1.53083)
-item_res = SubResource("Resource_ramb6")
+item_res = SubResource("Resource_qtkkr")
 
 [node name="SpringTendons2" parent="." instance=ExtResource("9_a57vq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.54148, 1.22078, 2.58334)
-item_res = SubResource("Resource_qthbe")
+item_res = SubResource("Resource_tydd0")
 
 [node name="Slingshot" parent="." instance=ExtResource("7_ty7xy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.96183, 2.72356, -2.69861)
-item_res = ExtResource("11_djmkk")
+item_res = SubResource("Resource_a5cc3")
 
 [node name="Dummy" parent="." instance=ExtResource("11_n4n76")]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -6.5464, 1.22078, -6.53263)

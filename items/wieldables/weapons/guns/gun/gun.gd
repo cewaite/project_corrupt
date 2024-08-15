@@ -17,10 +17,9 @@ func _ready():
 	if not gun_res.curr_ammo:
 		gun_res.curr_ammo = gun_res.max_ammo
 
-func _process(delta):
+func _physics_process(delta):
 	if shooting and gun_res.curr_fire_rate_timer <= 0.0:
 		shoot()
-		
 		if gun_res.fire_mode == GunResource.FIRE_MODE.SEMI:
 			shooting = false
 		elif gun_res.fire_mode == GunResource.FIRE_MODE.FULL:
@@ -49,8 +48,9 @@ func shoot():
 			if anim_player.is_playing():
 				anim_player.stop()
 			anim_player.play("shoot")
+		#var collision_dict = aim_comp.fire_ray(gun_res.curr_spread)
+		var collision_dict = get_true_collision_dict(aim_comp.fire_ray(gun_res.curr_spread))
 		gun_res.shoot()
-		var collision_dict = aim_comp.fire_ray(gun_res.curr_spread)
 		if gun_res.is_projectile():
 			spawn_projectile(collision_dict)
 		elif gun_res.is_hitscan():
@@ -65,7 +65,7 @@ func reload():
 
 func spawn_projectile(collision_dict):
 	var collider = collision_dict["collider"]
-	var collision_point = collision_dict["collision_point"]
+	var collision_point = collision_dict["point"]
 	var projectile = gun_res.projectile_scene.instantiate() as RigidBody3D
 	projectile.position = barrel_point.position
 	projectile.projectile_velocity = gun_res.projectile_velocity
@@ -87,8 +87,24 @@ func fire_hitscan(collision_dict):
 	
 	if collider:
 		var bullet_decal = gun_res.bullet_decal.instantiate()
-		var collision_point = collision_dict["collision_point"]
-		var collision_normal = collision_dict["collision_normal"]
+		var collision_point = collision_dict["position"]
+		var collision_normal = collision_dict["normal"]
 		collider.add_child(bullet_decal)
 		bullet_decal.global_position = collision_point
 		bullet_decal.look_at(collision_point + collision_normal, Vector3.ONE)
+
+# Uses the collision info from the parents aim_comp and the barrel point
+# to get a more accurate shot from the barrel and returns the collision info
+# from that intersection
+func get_true_collision_dict(collision_dict):
+	var collision_point = collision_dict["position"]
+	var ray_intersect = PhysicsRayQueryParameters3D.create(barrel_point.global_position, collision_point)
+	# param values came from aim_comp raycast
+	ray_intersect.collision_mask = 412
+	ray_intersect.collide_with_areas = true
+	var intersection = get_world_3d().direct_space_state.intersect_ray(ray_intersect)
+	
+	if not intersection.is_empty():
+		return intersection
+	else:
+		return collision_dict
