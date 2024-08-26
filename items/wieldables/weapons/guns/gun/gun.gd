@@ -65,7 +65,7 @@ func reload():
 
 func spawn_projectile(collision_dict):
 	var collider = collision_dict["collider"]
-	var collision_point = collision_dict["point"]
+	var collision_point = collision_dict["position"]
 	var projectile = gun_res.projectile_scene.instantiate() as RigidBody3D
 	projectile.position = barrel_point.position
 	projectile.projectile_velocity = gun_res.projectile_velocity

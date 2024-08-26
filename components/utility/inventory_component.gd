@@ -27,7 +27,7 @@ func _process(delta):
 	input_comp.handle_wieldable_inputs()
 	
 	if input_comp.get_drop_input():
-		drop_wieldable()
+		drop_curr_wieldable()
 	
 	if input_comp is PlayerInputComponent:
 		if input_comp.get_inc_wieldable():
@@ -47,7 +47,7 @@ func pickup_wieldable(wieldable_res) -> void:
 		slots[available_slot] = wieldable_res
 		select_slot(available_slot)
 	else:
-		drop_wieldable()
+		drop_curr_wieldable()
 		slots[curr_slot] = wieldable_res
 		update_curr_equipped()
 	#print_debug("Picked up ", wieldable_res.name)
@@ -56,22 +56,25 @@ func pickup_wieldable(wieldable_res) -> void:
 # Checks if curr_equipped is not null, therefore there is a wieldable to drop.
 # If there is, create an item version of it using its item_scene, and throw it forward
 # from the hand. Update curr equipped
-func drop_wieldable() -> void:
+func drop_curr_wieldable() -> void:
 	#print_debug("before drop: ", slots, " curr_slot: ", curr_slot)
 	if curr_equipped:
+		var res = slots[curr_slot]
 		slots[curr_slot] = null
-		#Temporary, may replace with global GameManager.spawn_item(item_res, init_velocity)
-		var dropped_item = curr_equipped.scene.instantiate() as RigidBody3D
-		dropped_item.set_item_resource(curr_equipped)
-		get_tree().root.get_child(0).add_child(dropped_item)
-		dropped_item.global_position = hand.global_position
-		var hand_forward_vec = -hand.global_transform.basis.z.normalized()
-		dropped_item.apply_force((hand_forward_vec * throw_force) + parent.velocity)
-		dropped_item.reset_collision_layer()
-
-		update_curr_equipped()
+		drop_wieldable(res)
 	#print_debug("after drop: ", slots, " curr_slot: ", curr_slot)
 
+func drop_wieldable(res) -> void:
+	#Temporary, may replace with global GameManager.spawn_item(item_res, init_velocity)	
+	var dropped_item = res.scene.instantiate() as RigidBody3D
+	dropped_item.set_item_resource(res)
+	get_tree().root.get_child(0).add_child(dropped_item)
+	dropped_item.global_position = hand.global_position
+	var hand_forward_vec = -hand.global_transform.basis.z.normalized()
+	dropped_item.apply_force((hand_forward_vec * throw_force) + parent.velocity)
+	dropped_item.reset_collision_layer()
+
+	update_curr_equipped()
 
 # Update curr_equipped and render it infront of player.
 func update_curr_equipped():
@@ -113,6 +116,19 @@ func select_slot(slot_num: int):
 	update_curr_equipped()
 	#print_debug("Holding a ", curr_equipped.name)
 	
+
+func increase_slots(amount: int):
+	max_slots += amount
+	for i in range(amount):
+		slots.append(null)
+	
+
+func decrease_slots(amount: int):
+	max_slots -= amount
+	for i in range(amount):
+		var dropped_res = slots.pop_back()
+		if dropped_res:
+			drop_wieldable(dropped_res)
 
 func last_slot() -> int:
 	return slots.size() - 1

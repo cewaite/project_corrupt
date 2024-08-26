@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://dt43uoox8jtjc"]
+
+[ext_resource type="Script" path="res://items/wieldables/wieldable.gd" id="1_b7lvv"]
+[ext_resource type="Script" path="res://components/utility/interactable_component.gd" id="2_j7s7f"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bhos4"]
+albedo_color = Color(0.501961, 0.423529, 0.317647, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_h7wsb"]
+material = SubResource("StandardMaterial3D_bhos4")
+size = Vector3(1.2, 1.2, 1.2)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_6vc2f"]
+points = PackedVector3Array(-0.6, -0.6, -0.6, 0.599972, 0.6, 0.6, 0.599972, 0.6, -0.6, 0.599972, -0.6, 0.6, -0.6, 0.6, 0.6, 0.599972, -0.6, -0.6, -0.6, -0.6, 0.6, -0.6, 0.6, -0.6)
+
+[node name="BoxLarge" type="RigidBody3D"]
+collision_layer = 288
+collision_mask = 31
+mass = 10.0
+script = ExtResource("1_b7lvv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_h7wsb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_6vc2f")
+
+[node name="InteractableComponent" type="Node" parent="." node_paths=PackedStringArray("parent")]
+script = ExtResource("2_j7s7f")
+parent = NodePath("..")

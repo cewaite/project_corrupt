@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="AugmentResource" load_steps=4 format=3 uid="uid://c75l5ueh6h0pc"]
+
+[ext_resource type="Script" path="res://resources/items/augments/augment_resource.gd" id="1_4e5kx"]
+[ext_resource type="PackedScene" uid="uid://c0uvj1e3k0kac" path="res://items/augments/biomechanical_appendage/biomechanical_appendage.tscn" id="1_73pnv"]
+[ext_resource type="PackedScene" uid="uid://cmeugomthkhhg" path="res://components/augment_components/biomechanical_appendage/biomechanical_appendage_component.tscn" id="1_kamuk"]
+
+[resource]
+script = ExtResource("1_4e5kx")
+component_scene = ExtResource("1_kamuk")
+augment_type = 1
+name = "Biomechanical Appendage"
+scene = ExtResource("1_73pnv")

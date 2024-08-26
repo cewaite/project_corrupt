@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://d0wwu141dggj0"]
+[gd_scene load_steps=6 format=3 uid="uid://d0wwu141dggj0"]
 
 [ext_resource type="Script" path="res://items/wieldables/wieldable.gd" id="1_44bte"]
 [ext_resource type="Script" path="res://components/utility/interactable_component.gd" id="2_8mlbi"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3regc"]
+albedo_color = Color(0.501961, 0.423529, 0.317647, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_3vpe3"]
+material = SubResource("StandardMaterial3D_3regc")
 size = Vector3(0.8, 0.8, 0.8)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_wrmm7"]

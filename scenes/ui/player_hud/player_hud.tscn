@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://wwqhmf2tgxbb"]
 
-[ext_resource type="Script" path="res://scenes/player_hud/player_hud.gd" id="1_6axa5"]
+[ext_resource type="Script" path="res://scenes/ui/player_hud/player_hud.gd" id="1_6axa5"]
 [ext_resource type="Texture2D" uid="uid://dqntisiqa85xp" path="res://assets/hud/select.svg" id="1_s64rg"]
 [ext_resource type="Texture2D" uid="uid://bm1xalmc26djc" path="res://assets/hud/convergence-target.svg" id="2_chmo1"]
 
@@ -28,7 +28,8 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="OpenCrosshair" type="TextureRect" parent="CrosshairCenterContainer"]
-custom_minimum_size = Vector2(20, 20)
+self_modulate = Color(0, 1, 0, 1)
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -37,6 +38,8 @@ expand_mode = 2
 
 [node name="InteractCrosshair" type="TextureRect" parent="CrosshairCenterContainer"]
 visible = false
+self_modulate = Color(0, 1, 0, 1)
+custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4

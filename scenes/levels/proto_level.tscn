@@ -1,7 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://bi75d0urlsc5v"]
+[gd_scene load_steps=26 format=3 uid="uid://bi75d0urlsc5v"]
 
+[ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_nip5c"]
 [ext_resource type="Material" uid="uid://cb57ptx8jr8yw" path="res://assets/proto_textures/dark/proto_texture2_dark.tres" id="1_r3pvk"]
 [ext_resource type="PackedScene" uid="uid://d0wwu141dggj0" path="res://items/wieldables/boxes/box_medium/box_medium.tscn" id="4_hb5wx"]
+[ext_resource type="PackedScene" uid="uid://dt43uoox8jtjc" path="res://items/wieldables/boxes/box_large/box_large.tscn" id="4_icbgh"]
 [ext_resource type="PackedScene" uid="uid://kpkiyneufmm5" path="res://prefabs/laser_projectile/laser_projectile.tscn" id="5_7ryn5"]
 [ext_resource type="Script" path="res://resources/items/wieldables/wieldable_resource.gd" id="5_nirk2"]
 [ext_resource type="PackedScene" uid="uid://bat5o1wmiks71" path="res://items/wieldables/weapons/guns/power_tube/power_tube.tscn" id="6_gmwvi"]
@@ -12,6 +14,8 @@
 [ext_resource type="PackedScene" uid="uid://sb6ym24rfkad" path="res://entities/dummy/dummy.tscn" id="11_n4n76"]
 [ext_resource type="PackedScene" uid="uid://bmvd3mh3fta3h" path="res://components/augment_components/spring_tendons_component/spring_tendons_component.tscn" id="11_umgp4"]
 [ext_resource type="Script" path="res://resources/items/augments/augment_resource.gd" id="12_h4ucy"]
+[ext_resource type="PackedScene" uid="uid://c0uvj1e3k0kac" path="res://items/augments/biomechanical_appendage/biomechanical_appendage.tscn" id="13_6x0um"]
+[ext_resource type="Resource" uid="uid://c75l5ueh6h0pc" path="res://items/augments/biomechanical_appendage/biomechanical_appendage.tres" id="14_1h1xk"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_orlxs"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -26,13 +30,19 @@ sky = SubResource("Sky_pmvwj")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="Resource" id="Resource_gro0j"]
+[sub_resource type="Resource" id="Resource_y5gif"]
 resource_local_to_scene = true
 script = ExtResource("5_nirk2")
 name = "Medium Box"
 scene = ExtResource("4_hb5wx")
 
-[sub_resource type="Resource" id="Resource_bta1e"]
+[sub_resource type="Resource" id="Resource_l6mn1"]
+resource_local_to_scene = true
+script = ExtResource("5_nirk2")
+name = "Large Box"
+scene = ExtResource("4_icbgh")
+
+[sub_resource type="Resource" id="Resource_qp1ne"]
 resource_local_to_scene = true
 script = ExtResource("6_n2orn")
 max_ammo = 20
@@ -40,7 +50,7 @@ reload_speed = 0.0
 min_spread = 1.0
 max_spread = 40.0
 spread_inc_rate = 10.0
-spread_dec_rate = 0.1
+spread_dec_rate = 0.2
 fire_mode = 2
 fire_rate = 0.2
 fire_type = 1
@@ -52,7 +62,7 @@ scrap_price = 500
 name = "Power Tube"
 scene = ExtResource("6_gmwvi")
 
-[sub_resource type="Resource" id="Resource_qtkkr"]
+[sub_resource type="Resource" id="Resource_fa0s8"]
 resource_local_to_scene = true
 script = ExtResource("12_h4ucy")
 component_scene = ExtResource("11_umgp4")
@@ -60,7 +70,7 @@ augment_type = 3
 name = "Spring Tendons"
 scene = ExtResource("9_a57vq")
 
-[sub_resource type="Resource" id="Resource_tydd0"]
+[sub_resource type="Resource" id="Resource_wtsee"]
 resource_local_to_scene = true
 script = ExtResource("12_h4ucy")
 component_scene = ExtResource("11_umgp4")
@@ -68,15 +78,15 @@ augment_type = 3
 name = "Spring Tendons"
 scene = ExtResource("9_a57vq")
 
-[sub_resource type="Resource" id="Resource_a5cc3"]
+[sub_resource type="Resource" id="Resource_i5yqd"]
 resource_local_to_scene = true
 script = ExtResource("6_n2orn")
 max_ammo = 4
 reload_speed = 0.0
 min_spread = 1.0
-max_spread = 40.0
+max_spread = 60.0
 spread_inc_rate = 20.0
-spread_dec_rate = 0.2
+spread_dec_rate = 0.5
 fire_mode = 0
 fire_rate = 0.0
 fire_type = 0
@@ -88,8 +98,13 @@ scrap_price = 100
 name = "Slingshot_v52843643.3"
 scene = ExtResource("7_ty7xy")
 
-[node name="ProtoLevel" type="Node3D"]
+[node name="ProtoLevel" type="Node3D" node_paths=PackedStringArray("player_spawn_point")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.14713e-05, -4.76837e-07, 0.0177498)
+script = ExtResource("1_nip5c")
+player_spawn_point = NodePath("PlayerSpawnPoint")
+
+[node name="PlayerSpawnPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.521581, 2.9208, 13.0753)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_w7tki")
@@ -133,23 +148,27 @@ size = Vector3(5.33008, 0.366241, 3.50043)
 
 [node name="BoxMedium" parent="." instance=ExtResource("4_hb5wx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.45344, 2.99333, 1.79641)
-item_res = SubResource("Resource_gro0j")
+item_res = SubResource("Resource_y5gif")
+
+[node name="BoxLarge" parent="." instance=ExtResource("4_icbgh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.78559, 2.36919, 3.54442)
+item_res = SubResource("Resource_l6mn1")
 
 [node name="PowerTube" parent="." instance=ExtResource("6_gmwvi")]
 transform = Transform3D(0.16065, -0.986642, 0.0269971, 0.987002, 0.160708, 8.62865e-08, -0.00433873, 0.0266462, 0.999636, 4.99468, 2.81347, -2.78903)
-item_res = SubResource("Resource_bta1e")
+item_res = SubResource("Resource_qp1ne")
 
 [node name="SpringTendons" parent="." instance=ExtResource("9_a57vq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.54148, 1.22078, 1.53083)
-item_res = SubResource("Resource_qtkkr")
+item_res = SubResource("Resource_fa0s8")
 
 [node name="SpringTendons2" parent="." instance=ExtResource("9_a57vq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.54148, 1.22078, 2.58334)
-item_res = SubResource("Resource_tydd0")
+item_res = SubResource("Resource_wtsee")
 
 [node name="Slingshot" parent="." instance=ExtResource("7_ty7xy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.96183, 2.72356, -2.69861)
-item_res = SubResource("Resource_a5cc3")
+item_res = SubResource("Resource_i5yqd")
 
 [node name="Dummy" parent="." instance=ExtResource("11_n4n76")]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -6.5464, 1.22078, -6.53263)
@@ -159,3 +178,7 @@ transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -1.42417, 1.22078, -11.6)
 
 [node name="Dummy3" parent="." instance=ExtResource("11_n4n76")]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 3.50893, 1.22078, -16.5355)
+
+[node name="BiomechanicalAppendage" parent="." instance=ExtResource("13_6x0um")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.58476, 1.22078, 3.47165)
+item_res = ExtResource("14_1h1xk")

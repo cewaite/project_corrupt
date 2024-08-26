@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="WieldableResource" load_steps=3 format=3 uid="uid://b07nsoglf7g4x"]
+
+[ext_resource type="PackedScene" uid="uid://dt43uoox8jtjc" path="res://items/wieldables/boxes/box_large/box_large.tscn" id="1_iw4tj"]
+[ext_resource type="Script" path="res://resources/items/wieldables/wieldable_resource.gd" id="1_jyirf"]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("1_jyirf")
+name = "Large Box"
+scene = ExtResource("1_iw4tj")

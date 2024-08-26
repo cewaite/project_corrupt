@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://sb6ym24rfkad"]
+[gd_scene load_steps=9 format=3 uid="uid://sb6ym24rfkad"]
 
 [ext_resource type="PackedScene" uid="uid://bextjj1hoo11r" path="res://assets/body.blend" id="1_duca2"]
 [ext_resource type="Script" path="res://entities/dummy/dummy.gd" id="1_ovlkl"]
 [ext_resource type="Script" path="res://components/health/hurtbox.gd" id="2_mu8gf"]
 [ext_resource type="Script" path="res://components/health/health_component.gd" id="3_etq5b"]
+[ext_resource type="Script" path="res://components/utility/interactable_component.gd" id="5_cwvyb"]
+[ext_resource type="Script" path="res://components/utility/speak_component.gd" id="6_gkh8y"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_cp0fw"]
 radius = 0.05
@@ -11,11 +13,12 @@ radius = 0.05
 [sub_resource type="BoxShape3D" id="BoxShape3D_utqa7"]
 size = Vector3(0.188503, 0.415464, 0.1)
 
-[node name="Dummy" type="StaticBody3D"]
+[node name="Dummy" type="StaticBody3D" node_paths=PackedStringArray("speak_comp")]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
-collision_layer = 2
+collision_layer = 34
 collision_mask = 31
 script = ExtResource("1_ovlkl")
+speak_comp = NodePath("SpeakComponent")
 
 [node name="body" parent="." instance=ExtResource("1_duca2")]
 transform = Transform3D(0.07, 0, 0, 0, 0.07, 0, 0, 0, 0.07, 0, 0, 0)
@@ -48,3 +51,11 @@ shape = SubResource("BoxShape3D_utqa7")
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.477649, -0.00958052)
 shape = SubResource("SphereShape3D_cp0fw")
+
+[node name="InteractableComponent" type="Node" parent="." node_paths=PackedStringArray("parent")]
+script = ExtResource("5_cwvyb")
+parent = NodePath("..")
+
+[node name="SpeakComponent" type="Node" parent="."]
+script = ExtResource("6_gkh8y")
+dialogue = Array[String](["I'm a dummy...", "dude... I'm a dummy...", "I DON\"T TALK STOP TRYING"])

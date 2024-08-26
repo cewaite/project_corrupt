@@ -56,3 +56,11 @@ func change_wieldable_hud():
 func _on_wieldable_changed(new_res):
 	equipped_res = new_res
 	change_wieldable_hud()
+
+func _on_player_interact_hovering(is_hovering):
+	if is_hovering:
+		open_crosshair.visible = false
+		interact_crosshair.visible = true
+	else:
+		open_crosshair.visible = true
+		interact_crosshair.visible = false

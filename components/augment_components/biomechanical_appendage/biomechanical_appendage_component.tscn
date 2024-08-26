@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmeugomthkhhg"]
+
+[ext_resource type="Script" path="res://components/augment_components/biomechanical_appendage/biomechanical_appendage_component.gd" id="1_e1hw4"]
+
+[node name="BiomechanicalAppendageComponent" type="Node"]
+script = ExtResource("1_e1hw4")

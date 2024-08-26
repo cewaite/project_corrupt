@@ -1,0 +1,39 @@
+[gd_scene load_steps=9 format=3 uid="uid://c0uvj1e3k0kac"]
+
+[ext_resource type="Script" path="res://items/augments/augment.gd" id="1_3d0f4"]
+[ext_resource type="Texture2D" uid="uid://d0due3logsphq" path="res://assets/augment_icons/robot-leg.svg" id="2_tj2cj"]
+[ext_resource type="Script" path="res://components/utility/interactable_component.gd" id="3_xra55"]
+[ext_resource type="Texture2D" uid="uid://dmw0mi2t5y62g" path="res://assets/augment_icons/mechanical-arm.svg" id="4_dv11g"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_570cv"]
+albedo_texture = ExtResource("2_tj2cj")
+
+[sub_resource type="BoxMesh" id="BoxMesh_dtuuk"]
+size = Vector3(0.4, 0.1, 0.4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ovmgd"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_dt3rb"]
+points = PackedVector3Array(0.185284, 0.05, 0.185284, -0.191261, -0.05, -0.191261, -0.191261, -0.05, 0.191261, 0.191261, -0.05, -0.191261, -0.185284, 0.05, -0.185284, 0.191261, -0.05, 0.191261, -0.185284, 0.05, 0.185284, 0.185284, 0.05, -0.185284)
+
+[node name="BiomechanicalAppendage" type="RigidBody3D"]
+collision_layer = 36
+collision_mask = 16
+script = ExtResource("1_3d0f4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_570cv")
+mesh = SubResource("BoxMesh_dtuuk")
+surface_material_override/0 = SubResource("StandardMaterial3D_ovmgd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_dt3rb")
+
+[node name="InteractableComponent" type="Node" parent="." node_paths=PackedStringArray("parent")]
+script = ExtResource("3_xra55")
+parent = NodePath("..")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.075, 0, 0, 0, -3.27835e-09, -0.075, 0, 0.075, -3.27835e-09, 0, 0.0512278, 0)
+modulate = Color(0, 0, 0, 1)
+texture = ExtResource("4_dv11g")

@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=3 uid="uid://3ij4rg2474ir"]
+
+[ext_resource type="Script" path="res://scenes/ui/dialogue_ui/dialogue_ui.gd" id="1_fduhd"]
+
+[node name="DialogueUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fduhd")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 600
+theme_override_constants/margin_top = 800
+theme_override_constants/margin_right = 600
+theme_override_constants/margin_bottom = 50
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="DialogueText" type="RichTextLabel" parent="MarginContainer/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 25
+text = "This is test dialogue text..."
+scroll_following = true
+
+[node name="FadeTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 5.0
+
+[connection signal="timeout" from="FadeTimer" to="." method="_on_fade_timer_timeout"]
