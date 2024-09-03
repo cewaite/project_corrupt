@@ -1,6 +1,7 @@
 class_name Gun extends Weapon
 
 @export var anim_player: AnimationPlayer
+@export var hands: Node3D
 @export var barrel_point: Node3D
 
 var gun_res: GunResource
@@ -108,3 +109,7 @@ func get_true_collision_dict(collision_dict):
 		return intersection
 	else:
 		return collision_dict
+
+func show_hands(show: bool):
+	if hands:
+		hands.visible = show

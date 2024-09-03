@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://c0jacunf4gsjp"]
+[gd_scene load_steps=7 format=3 uid="uid://c0jacunf4gsjp"]
 
 [ext_resource type="Script" path="res://items/wieldables/weapons/guns/gun/gun.gd" id="1_gchq7"]
 [ext_resource type="PackedScene" uid="uid://5hn3ldh2531b" path="res://assets/guns/slingshot_proprotional.blend" id="2_fcabw"]
 [ext_resource type="Script" path="res://components/utility/interactable_component.gd" id="3_vjmyb"]
+[ext_resource type="PackedScene" uid="uid://cj50swx7oxk6x" path="res://assets/LowPolyFPSHands.glb" id="4_0aist"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4heep"]
 size = Vector3(0.05, 0.635, 0.103)
@@ -10,10 +11,12 @@ size = Vector3(0.05, 0.635, 0.103)
 [sub_resource type="BoxShape3D" id="BoxShape3D_yxlqo"]
 size = Vector3(0.05, 0.2, 0.271484)
 
-[node name="Slingshot" type="RigidBody3D" node_paths=PackedStringArray("barrel_point")]
+[node name="Slingshot" type="RigidBody3D" node_paths=PackedStringArray("hands", "barrel_point")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.13481)
 collision_layer = 36
 collision_mask = 16
 script = ExtResource("1_gchq7")
+hands = NodePath("LowPolyFPSHands")
 barrel_point = NodePath("BarrelPoint")
 
 [node name="slingshot_proprotional" parent="." instance=ExtResource("2_fcabw")]
@@ -33,3 +36,54 @@ parent = NodePath("..")
 
 [node name="BarrelPoint" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.360369)
+
+[node name="LowPolyFPSHands" parent="." instance=ExtResource("4_0aist")]
+transform = Transform3D(-4.37114e-09, -0.1, 0, 0.1, -4.37114e-09, 0, 0, 0, 0.1, 0.0528086, -0.120396, 0.233707)
+visible = false
+
+[node name="hand" parent="LowPolyFPSHands" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.119904, 0.136227, 0.916718)
+
+[node name="arm_lower" parent="LowPolyFPSHands/hand" index="0"]
+transform = Transform3D(1, -4.6083e-10, -6.33039e-09, -4.60812e-10, 0.989458, -0.144822, 6.33039e-09, 0.144822, 0.989458, 0, -0.118854, 0.00119305)
+
+[node name="index_1" parent="LowPolyFPSHands/hand/index_0" index="0"]
+transform = Transform3D(1, -1.28028e-08, -3.09086e-08, -1.28028e-08, 0.707107, -0.707107, 3.09086e-08, 0.707107, 0.707107, 0, 0, -0.520541)
+
+[node name="index_2" parent="LowPolyFPSHands/hand/index_0/index_1" index="0"]
+transform = Transform3D(1, -3.7375e-08, -4.32497e-08, -3.73749e-08, 0.14496, -0.989438, 4.32497e-08, 0.989438, 0.14496, -2.98023e-07, 4.76837e-07, -0.496836)
+
+[node name="middle_0" parent="LowPolyFPSHands/hand" index="2"]
+transform = Transform3D(1, -3.9027e-08, -4.34597e-08, -3.9027e-08, 0.107166, -0.994241, 4.34597e-08, 0.994241, 0.107166, 0.219422, 0.0337446, -1.93336)
+
+[node name="middle_1" parent="LowPolyFPSHands/hand/middle_0" index="0"]
+transform = Transform3D(1, -3.96008e-08, -4.35177e-08, -3.96008e-08, 0.0940387, -0.995569, 4.35177e-08, 0.995569, 0.0940387, 0, 0.0682564, -0.533337)
+
+[node name="middle_2" parent="LowPolyFPSHands/hand/middle_0/middle_1" index="0"]
+transform = Transform3D(1, -2.60545e-10, -4.76555e-09, -2.60558e-10, 0.99404, -0.109023, 4.76555e-09, 0.109023, 0.99404, 2.38419e-07, 0.00268602, -0.576429)
+
+[node name="pinky_0" parent="LowPolyFPSHands/hand" index="3"]
+transform = Transform3D(1, -3.9027e-08, -4.34597e-08, -3.9027e-08, 0.107166, -0.994241, 4.34597e-08, 0.994241, 0.107166, -0.636916, -0.0534774, -1.92396)
+
+[node name="pinky_1" parent="LowPolyFPSHands/hand/pinky_0" index="0"]
+transform = Transform3D(1, -3.96008e-08, -4.35177e-08, -3.96008e-08, 0.0940387, -0.995569, 4.35177e-08, 0.995569, 0.0940387, 0, -0.105513, -0.60465)
+
+[node name="ring_0" parent="LowPolyFPSHands/hand" index="4"]
+transform = Transform3D(1, -3.9027e-08, -4.34597e-08, -3.9027e-08, 0.107166, -0.994241, 4.34597e-08, 0.994241, 0.107166, -0.22161, 0.0197293, -1.93185)
+
+[node name="ring_1" parent="LowPolyFPSHands/hand/ring_0" index="0"]
+transform = Transform3D(1, -3.96008e-08, -4.35177e-08, -3.96008e-08, 0.0940387, -0.995569, 4.35177e-08, 0.995569, 0.0940387, 0, 0.037262, -0.544506)
+
+[node name="ring_2" parent="LowPolyFPSHands/hand/ring_0/ring_1" index="0"]
+transform = Transform3D(1, -2.60545e-10, -4.76555e-09, -2.60558e-10, 0.99404, -0.109023, 4.76555e-09, 0.109023, 0.99404, 0, -0.00268614, -0.558586)
+
+[node name="thumb_0" parent="LowPolyFPSHands/hand" index="5"]
+transform = Transform3D(0.103867, -1.19417, -1.8595e-08, 1.11643, 0.0971059, -0.425403, 0.423803, 0.0368618, 1.12065, 0.71163, -0.0538708, -0.365427)
+
+[node name="thumb_1" parent="LowPolyFPSHands/hand/thumb_0" index="0"]
+transform = Transform3D(0.640667, -0.0312543, 0.767183, -0.0312543, 0.997281, 0.0667285, -0.767183, -0.0667285, 0.637948, 0.418848, -1.78814e-07, -0.541475)
+
+[node name="thumb_2" parent="LowPolyFPSHands/hand/thumb_0/thumb_1" index="0"]
+transform = Transform3D(0.882743, -0.0101989, 0.469746, -0.0101989, 0.999113, 0.0408579, -0.469746, -0.0408579, 0.881855, 0.286444, -1.19209e-07, -0.397435)
+
+[editable path="LowPolyFPSHands"]

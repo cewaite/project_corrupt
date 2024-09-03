@@ -79,7 +79,7 @@ parent = NodePath("../../..")
 player_input_comp = NodePath("../../../Controllers/PlayerInputComponent")
 
 [node name="Hand" type="Node3D" parent="Head/Camera"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.395782, -0.295732, -0.835098)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.396, -0.296, 0)
 
 [node name="HeightRayCast" type="RayCast3D" parent="."]
 transform = Transform3D(-1, 1.74846e-07, 0, -8.74228e-08, -2, 0, 0, 0, 1, 0, 0, 0)

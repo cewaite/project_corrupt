@@ -69,6 +69,9 @@ func drop_wieldable(res) -> void:
 	var dropped_item = res.scene.instantiate() as RigidBody3D
 	dropped_item.set_item_resource(res)
 	get_tree().root.get_child(0).add_child(dropped_item)
+	
+	if dropped_item.has_method("show_hands"):
+		dropped_item.show_hands(true)
 	dropped_item.global_position = hand.global_position
 	var hand_forward_vec = -hand.global_transform.basis.z.normalized()
 	dropped_item.apply_force((hand_forward_vec * throw_force) + parent.velocity)
@@ -88,6 +91,9 @@ func update_curr_equipped():
 		curr_equipped_scene.freeze = true
 		curr_equipped_scene.clear_collision_layer()
 		hand.add_child(curr_equipped_scene)
+		
+		if curr_equipped_scene.has_method("show_hands"):
+			curr_equipped_scene.show_hands(true)
 	equipped_wieldable_changed.emit(curr_equipped)
 
 # Move curr_slot up a slot. If at the last slot, loop back to first slot.
