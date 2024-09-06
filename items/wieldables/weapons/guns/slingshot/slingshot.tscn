@@ -12,7 +12,7 @@ size = Vector3(0.05, 0.635, 0.103)
 size = Vector3(0.05, 0.2, 0.271484)
 
 [node name="Slingshot" type="RigidBody3D" node_paths=PackedStringArray("hands", "barrel_point")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.13481)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0648593)
 collision_layer = 36
 collision_mask = 16
 script = ExtResource("1_gchq7")

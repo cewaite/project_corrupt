@@ -13,7 +13,7 @@ height = 1.54
 size = Vector3(0.115, 0.209482, 0.370605)
 
 [node name="PowerTube" type="RigidBody3D" node_paths=PackedStringArray("hands", "barrel_point")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.782805)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0607675)
 collision_layer = 36
 collision_mask = 16
 script = ExtResource("1_8tdxw")

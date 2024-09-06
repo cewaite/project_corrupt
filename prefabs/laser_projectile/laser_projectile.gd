@@ -17,7 +17,7 @@ func set_damage(val):
 func die():
 	mesh.visible = false
 	particles.emitting = true
-	$HitBox/CollisionShape3D.disabled = true
+	#$HitBox/CollisionShape3D.disabled = true
 	await get_tree().create_timer(1.0).timeout
 	queue_free()
 

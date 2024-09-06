@@ -71,7 +71,7 @@ func drop_wieldable(res) -> void:
 	get_tree().root.get_child(0).add_child(dropped_item)
 	
 	if dropped_item.has_method("show_hands"):
-		dropped_item.show_hands(true)
+		dropped_item.show_hands(false)
 	dropped_item.global_position = hand.global_position
 	var hand_forward_vec = -hand.global_transform.basis.z.normalized()
 	dropped_item.apply_force((hand_forward_vec * throw_force) + parent.velocity)
