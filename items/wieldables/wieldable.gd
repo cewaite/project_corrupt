@@ -24,9 +24,11 @@ func on_item_pickup(body):
 		inv_comp.pickup_wieldable(get_item_resource())
 		queue_free()
 
+func on_wieldable_equip():
+	pass
+
 func clear_collision_layer():
 	collision_layer = 0
-
 
 func reset_collision_layer():
 	collision_layer = original_collision_layer

@@ -6,7 +6,7 @@ class_name PlayerHUD extends Control
 var equipped_res: WieldableResource
 
 var radius: float = 0.0
-var color: Color = Color.LAWN_GREEN
+@export var color: Color = Color.LAWN_GREEN
 
 func _process(delta):
 	if equipped_res is GunResource:

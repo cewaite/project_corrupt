@@ -6,6 +6,7 @@ class_name Gun extends Weapon
 
 var gun_res: GunResource
 var shooting: bool = false
+var equipped: bool = false
 
 # For storing the users aim component
 var aim_comp: AimComponent
@@ -15,8 +16,8 @@ func _ready():
 	gun_res = item_res
 	if not gun_res.curr_spread:
 		gun_res.curr_spread = gun_res.min_spread
-	if not gun_res.curr_ammo:
-		gun_res.curr_ammo = gun_res.max_ammo
+	#if not gun_res.curr_ammo:
+		#gun_res.curr_ammo = gun_res.max_ammo
 
 func _physics_process(delta):
 	if shooting and gun_res.curr_fire_rate_timer <= 0.0:
@@ -25,12 +26,19 @@ func _physics_process(delta):
 			shooting = false
 		elif gun_res.fire_mode == GunResource.FIRE_MODE.FULL:
 			gun_res.curr_fire_rate_timer = gun_res.fire_rate
+	else:
+		gun_res.decrement_spread()
 	
 	if gun_res.fire_mode == GunResource.FIRE_MODE.FULL:
 		if gun_res.curr_fire_rate_timer > 0:
 			gun_res.curr_fire_rate_timer -= delta
 	
-	gun_res.decrement_spread()
+	#Handle weapon recoil
+	if equipped:
+		gun_res.target_recoil_pos = lerp(gun_res.target_recoil_pos, Vector3.ZERO, gun_res.recoil_speed * delta)
+		gun_res.curr_recoil_pos = lerp(gun_res.curr_recoil_pos, gun_res.target_recoil_pos, gun_res.snap_back_amount * delta)
+		position = gun_res.curr_recoil_pos
+	
 
 func get_item_resource():
 	return gun_res
@@ -44,14 +52,10 @@ func primary_use_released():
 	shooting = false
 
 func shoot():
+	print_debug("PEWWW")
 	if gun_res.has_ammo():
-		if anim_player:
-			if anim_player.is_playing():
-				anim_player.stop()
-			anim_player.play("shoot")
-		#var collision_dict = aim_comp.fire_ray(gun_res.curr_spread)
-		var collision_dict = get_true_collision_dict(aim_comp.fire_ray(gun_res.curr_spread))
 		gun_res.shoot()
+		var collision_dict = get_true_collision_dict(aim_comp.fire_ray(gun_res.curr_spread))
 		if gun_res.is_projectile():
 			spawn_projectile(collision_dict)
 		elif gun_res.is_hitscan():
@@ -60,8 +64,6 @@ func shoot():
 		print_debug("OUT OF AMMO")
 
 func reload():
-	if anim_player:
-		anim_player.play("reload")
 	gun_res.reload()
 
 func spawn_projectile(collision_dict):
@@ -113,3 +115,7 @@ func get_true_collision_dict(collision_dict):
 func show_hands(show: bool):
 	if hands:
 		hands.visible = show
+
+func on_wieldable_equip():
+	show_hands(true)
+	equipped = true
