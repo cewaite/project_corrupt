@@ -13,15 +13,18 @@ func _ready():
 	connect("area_entered", self._on_area_entered)
 
 func _on_area_entered(hitbox: HitBox):
+	if hitbox == null:
+		return
+	
+	register_hit(hitbox.damage)
+	
+	if hitbox.destroy_on_hit:
+		hitbox.owner.die()
+
+func register_hit(damage: int):
 	if hit_particles:
 		var hit_particles_instance = hit_particles.instantiate()
 		add_child(hit_particles_instance)
 	
-	if hitbox == null:
-		return
-	
 	if health_comp.has_method("take_damage"):
-		health_comp.take_damage(hitbox.damage * damaga_mult)
-
-	if hitbox.destroy_on_hit:
-		hitbox.owner.die()
+		health_comp.take_damage(damage * damaga_mult)

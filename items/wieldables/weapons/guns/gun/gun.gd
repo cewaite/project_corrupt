@@ -86,8 +86,9 @@ func fire_hitscan(collision_dict):
 	var collider = collision_dict["collider"]
 	if collider is HurtBox:
 		var hurtbox = collider as HurtBox
-		var health_comp = hurtbox.health_comp as HealthComponent
-		health_comp.take_damage(gun_res.damage * hurtbox.damaga_mult)
+		hurtbox.register_hit(gun_res.damage)
+		#var health_comp = hurtbox.health_comp as HealthComponent
+		#health_comp.take_damage(gun_res.damage * hurtbox.damaga_mult)
 	
 	if collider:
 		if not collider is HurtBox:
