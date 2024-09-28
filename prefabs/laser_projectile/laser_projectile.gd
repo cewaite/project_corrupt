@@ -10,6 +10,7 @@ var projectile_velocity: float
 
 func _ready():
 	set_linear_velocity(direction * projectile_velocity)
+	look_at(global_position + linear_velocity, Vector3.UP)
 
 func set_damage(val):
 	hitbox.damage = val
@@ -19,9 +20,6 @@ func die():
 	particles.emitting = true
 	#$HitBox/CollisionShape3D.disabled = true
 	await get_tree().create_timer(1.0).timeout
-	queue_free()
-
-func _on_timer_timeout():
 	queue_free()
 
 func _on_body_entered(body):

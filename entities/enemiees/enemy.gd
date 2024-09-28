@@ -1,8 +1,5 @@
-class_name Mag extends RigidBody3D
+class_name Enemy extends CharacterBody3D
 
-enum AMMO_TYPE {SIXMM, POWER_PACK}
-
-@export var ammo_type: AMMO_TYPE
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemResource" load_steps=3 format=3 uid="uid://gd5a47d00p8b"]
+
+[ext_resource type="PackedScene" uid="uid://bn7dbq616b34r" path="res://items/magazines/power_tube_magazine/power_tube_magazine.tscn" id="1_6gv3y"]
+[ext_resource type="Script" path="res://resources/items/item_resource.gd" id="1_hdr7x"]
+
+[resource]
+script = ExtResource("1_hdr7x")
+name = "Power Tube Magazine"
+scene = ExtResource("1_6gv3y")

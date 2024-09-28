@@ -3,14 +3,26 @@ class_name PlayerHUD extends Control
 @onready var open_crosshair = $CrosshairCenterContainer/OpenCrosshair
 @onready var interact_crosshair = $CrosshairCenterContainer/InteractCrosshair
 
+@onready var health_label = $HealthContainer/HBoxContainer/HealthLabel
+
+@onready var ammo_container = $AmmoContainer
+@onready var curr_ammo_label = $AmmoContainer/HBoxContainer/CurrAmmoLabel
+@onready var max_ammo_label = $AmmoContainer/HBoxContainer/MaxAmmoLabel
+
+var player_health_comp: HealthComponent
+var player_inv_comp: InventoryComponent
 var equipped_res: WieldableResource
 
 var radius: float = 0.0
 @export var color: Color = Color.LAWN_GREEN
 
+func _ready():
+	change_wieldable_hud()
+
 func _process(delta):
 	if equipped_res is GunResource:
 		radius = equipped_res.curr_spread
+		update_ammo_count()
 	queue_redraw()
 
 func _draw():
@@ -50,8 +62,10 @@ func enable_interact_crosshair(enabled: bool):
 func change_wieldable_hud():
 	if equipped_res is GunResource:
 		set_radius(equipped_res.min_spread)
+		show_ammo_count(true)
 	else:
 		set_radius(0.0)
+		show_ammo_count(false)
 
 func _on_wieldable_changed(new_res):
 	equipped_res = new_res
@@ -64,3 +78,14 @@ func _on_player_interact_hovering(is_hovering):
 	else:
 		open_crosshair.visible = true
 		interact_crosshair.visible = false
+
+func show_ammo_count(show: bool):
+	ammo_container.visible = show
+
+func update_ammo_count():
+	curr_ammo_label.text = str(equipped_res.curr_ammo)
+	max_ammo_label.text = str(player_inv_comp.curr_ammos[equipped_res.ammo_type])
+
+func _on_player_health_changed(val: int):
+	print_debug("First health change: " + str(val))
+	health_label.text = str(val)

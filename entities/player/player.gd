@@ -60,7 +60,7 @@ func _ready():
 func _input(event):
 	if event is InputEventMouseMotion:
 		mouse_input = event.relative
-		head.rotate_y(-event.relative.x * SENSITIVITY)
+		self.rotate_y(-event.relative.x * SENSITIVITY)
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-80), deg_to_rad(80))
 

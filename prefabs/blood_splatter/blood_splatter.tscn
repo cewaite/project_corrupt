@@ -1,0 +1,77 @@
+[gd_scene load_steps=15 format=3 uid="uid://dveugvs8wo0ar"]
+
+[ext_resource type="Shader" uid="uid://7nstuku8wecq" path="res://prefabs/blood_splatter/blood.tres" id="1_nws0y"]
+[ext_resource type="Shader" uid="uid://da8itp6tgcvjt" path="res://prefabs/blood_splatter/blood_spot.tres" id="2_sukru"]
+[ext_resource type="Script" path="res://components/utility/timeout_component.gd" id="3_dr52v"]
+[ext_resource type="Script" path="res://components/utility/particle_one_shot_component.gd" id="4_77hhi"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6hoa7"]
+render_priority = 0
+shader = ExtResource("1_nws0y")
+
+[sub_resource type="Curve" id="Curve_w821a"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.469198), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_jrdls"]
+curve = SubResource("Curve_w821a")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_c5f61"]
+spread = 180.0
+initial_velocity_min = 2.0
+initial_velocity_max = 5.0
+linear_accel_min = 4.0
+linear_accel_max = 4.0
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_jrdls")
+collision_mode = 2
+sub_emitter_mode = 3
+sub_emitter_amount_at_collision = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_wi20b"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5eybg"]
+render_priority = 0
+shader = ExtResource("2_sukru")
+
+[sub_resource type="Curve" id="Curve_d2esv"]
+_data = [Vector2(0, 0.664756), 0.0, 0.0, 0, 0, Vector2(0.0950704, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_lbx0p"]
+curve = SubResource("Curve_d2esv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1kkdm"]
+gravity = Vector3(0, 0, 0)
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_lbx0p")
+
+[sub_resource type="QuadMesh" id="QuadMesh_mg380"]
+orientation = 1
+
+[node name="BloodSplatter" type="GPUParticles3D"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_6hoa7")
+emitting = false
+amount = 100
+sub_emitter = NodePath("BloodSpot")
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_c5f61")
+draw_pass_1 = SubResource("QuadMesh_wi20b")
+
+[node name="BloodSpot" type="GPUParticles3D" parent="."]
+material_override = SubResource("ShaderMaterial_5eybg")
+cast_shadow = 0
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_1kkdm")
+draw_pass_1 = SubResource("QuadMesh_mg380")
+
+[node name="TimeoutComponent" type="Node" parent="." node_paths=PackedStringArray("parent")]
+script = ExtResource("3_dr52v")
+time_until_free = 3.0
+parent = NodePath("..")
+
+[node name="ParticleONeShotComponent" type="Node" parent="." node_paths=PackedStringArray("parent")]
+script = ExtResource("4_77hhi")
+parent = NodePath("..")

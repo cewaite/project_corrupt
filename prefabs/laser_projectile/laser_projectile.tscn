@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://kpkiyneufmm5"]
+[gd_scene load_steps=11 format=3 uid="uid://kpkiyneufmm5"]
 
 [ext_resource type="Script" path="res://prefabs/laser_projectile/laser_projectile.gd" id="1_hliag"]
 [ext_resource type="Script" path="res://components/health/hitbox.gd" id="2_ngjlh"]
+[ext_resource type="Script" path="res://components/utility/timeout_component.gd" id="3_0xqdd"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_wdvyo"]
 radius = 0.03
@@ -73,10 +74,9 @@ explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_votkp")
 draw_pass_1 = SubResource("BoxMesh_a8bmc")
 
-[node name="TimeoutTimer" type="Timer" parent="."]
-wait_time = 5.0
-one_shot = true
-autostart = true
+[node name="TimeoutComponent" type="Node" parent="." node_paths=PackedStringArray("parent")]
+script = ExtResource("3_0xqdd")
+time_until_free = 5.0
+parent = NodePath("..")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="timeout" from="TimeoutTimer" to="." method="_on_timer_timeout"]

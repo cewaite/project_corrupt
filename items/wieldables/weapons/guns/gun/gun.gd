@@ -13,11 +13,9 @@ var aim_comp: AimComponent
 
 func _ready():
 	super()
-	gun_res = item_res
+	gun_res = item_res as GunResource
 	if not gun_res.curr_spread:
 		gun_res.curr_spread = gun_res.min_spread
-	#if not gun_res.curr_ammo:
-		#gun_res.curr_ammo = gun_res.max_ammo
 
 func _physics_process(delta):
 	if shooting and gun_res.curr_fire_rate_timer <= 0.0:
@@ -38,6 +36,9 @@ func _physics_process(delta):
 		gun_res.target_recoil_pos = lerp(gun_res.target_recoil_pos, Vector3.ZERO, gun_res.recoil_speed * delta)
 		gun_res.curr_recoil_pos = lerp(gun_res.curr_recoil_pos, gun_res.target_recoil_pos, gun_res.snap_back_amount * delta)
 		position = gun_res.curr_recoil_pos
+		gun_res.target_recoil_rot = lerp(gun_res.target_recoil_rot, Vector3.ZERO, gun_res.recoil_speed * delta)
+		gun_res.curr_recoil_rot = lerp(gun_res.curr_recoil_rot, gun_res.target_recoil_rot, gun_res.snap_back_amount * delta)
+		rotation = gun_res.curr_recoil_rot
 	
 
 func get_item_resource():
@@ -52,7 +53,6 @@ func primary_use_released():
 	shooting = false
 
 func shoot():
-	print_debug("PEWWW")
 	if gun_res.has_ammo():
 		gun_res.shoot()
 		var collision_dict = get_true_collision_dict(aim_comp.fire_ray(gun_res.curr_spread))
@@ -63,8 +63,9 @@ func shoot():
 	else:
 		print_debug("OUT OF AMMO")
 
-func reload():
-	gun_res.reload()
+func reload(amount: int):
+	gun_res.curr_ammo = amount
+	# Also play animation
 
 func spawn_projectile(collision_dict):
 	var collider = collision_dict["collider"]
@@ -89,12 +90,13 @@ func fire_hitscan(collision_dict):
 		health_comp.take_damage(gun_res.damage * hurtbox.damaga_mult)
 	
 	if collider:
-		var bullet_decal = gun_res.bullet_decal.instantiate()
-		var collision_point = collision_dict["position"]
-		var collision_normal = collision_dict["normal"]
-		collider.add_child(bullet_decal)
-		bullet_decal.global_position = collision_point
-		bullet_decal.look_at(collision_point + collision_normal, Vector3.ONE)
+		if not collider is HurtBox:
+			var bullet_decal = gun_res.bullet_decal.instantiate()
+			var collision_point = collision_dict["position"]
+			var collision_normal = collision_dict["normal"]
+			collider.add_child(bullet_decal)
+			bullet_decal.global_position = collision_point
+			bullet_decal.look_at(collision_point + collision_normal, Vector3.ONE)
 
 # Uses the collision info from the parents aim_comp and the barrel point
 # to get a more accurate shot from the barrel and returns the collision info
@@ -117,5 +119,6 @@ func show_hands(show: bool):
 		hands.visible = show
 
 func on_wieldable_equip():
+	# Both turned off automatically when dropped due to scene reinstance
 	show_hands(true)
 	equipped = true

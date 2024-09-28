@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://t8sono4advwa"]
+[gd_scene load_steps=12 format=3 uid="uid://t8sono4advwa"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_5eyay"]
 [ext_resource type="Script" path="res://components/input/player_input_component.gd" id="1_ndjuu"]
@@ -9,9 +9,7 @@
 [ext_resource type="Script" path="res://components/abilities/attack_component.gd" id="6_yqap8"]
 [ext_resource type="Script" path="res://components/augment_components/augment_manager_component.gd" id="8_bsj0i"]
 [ext_resource type="PackedScene" uid="uid://0iabl60bscqx" path="res://components/abilities/aim_component/aim_component.tscn" id="9_nodv4"]
-[ext_resource type="Script" path="res://components/health/health_component.gd" id="9_v8bbt"]
 [ext_resource type="PackedScene" uid="uid://cjl6g56i2b8o7" path="res://components/abilities/player_interact_component/player_interact_component.tscn" id="10_jxydn"]
-[ext_resource type="Script" path="res://components/health/hurtbox.gd" id="12_jwmel"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cfpqj"]
 
@@ -66,10 +64,6 @@ parent = NodePath("../..")
 script = ExtResource("8_bsj0i")
 parent = NodePath("../..")
 
-[node name="HealthComponent" type="Node" parent="Utility"]
-script = ExtResource("9_v8bbt")
-max_health = 100
-
 [node name="Collider" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_cfpqj")
 
@@ -90,10 +84,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.396, -0.296, -0.855816)
 [node name="HeightRayCast" type="RayCast3D" parent="."]
 transform = Transform3D(-1, 1.74846e-07, 0, -8.74228e-08, -2, 0, 0, 0, 1, 0, 0, 0)
 collision_mask = 16
-
-[node name="HurtBox" type="Area3D" parent="." node_paths=PackedStringArray("health_comp")]
-script = ExtResource("12_jwmel")
-health_comp = NodePath("../Utility/HealthComponent")
-
-[node name="Collider2" type="CollisionShape3D" parent="HurtBox"]
-shape = SubResource("CapsuleShape3D_cfpqj")

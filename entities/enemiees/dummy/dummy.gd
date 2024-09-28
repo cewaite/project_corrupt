@@ -1,4 +1,4 @@
-extends StaticBody3D
+class_name Dummy extends Enemy
 
 @export var speak_comp: SpeakComponent
 

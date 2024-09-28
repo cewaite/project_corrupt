@@ -1,6 +1,6 @@
 class_name PlayerInputComponent extends InputComponent
 
-@export var head: Node3D
+@export var parent: CharacterBody3D
 @export var height_ray: RayCast3D
 
 var crouch_input: bool	## Detect if Player is crouching
@@ -10,7 +10,7 @@ var dec_wieldable: bool
 
 func handle_move_inputs(delta):
 	move_input = Input.get_vector("left", "right", "forward", "back")
-	direction_input = (head.transform.basis * Vector3(move_input.x, 0, move_input.y)).normalized()
+	direction_input = (parent.transform.basis * Vector3(move_input.x, 0, move_input.y)).normalized()
 	jump_input_pressed = Input.is_action_just_pressed("jump")
 	jump_input_released = Input.is_action_just_released("jump")
 	crouch_input = Input.is_action_pressed("crouch")

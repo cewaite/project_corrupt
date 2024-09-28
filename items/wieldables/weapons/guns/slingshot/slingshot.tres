@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="GunResource" load_steps=4 format=3 uid="uid://cluioy22ebgxv"]
 
 [ext_resource type="Script" path="res://resources/items/wieldables/weapons/guns/gun_resource.gd" id="1_7xitk"]
-[ext_resource type="PackedScene" uid="uid://bpgtk4weo3sgh" path="res://prefabs/666_mm_bullet_terrain_decal.tscn" id="1_u4yff"]
+[ext_resource type="PackedScene" uid="uid://bpgtk4weo3sgh" path="res://prefabs/666_mm_decal/666_mm_bullet_terrain_decal.tscn" id="1_u4yff"]
 [ext_resource type="PackedScene" uid="uid://c0jacunf4gsjp" path="res://items/wieldables/weapons/guns/slingshot/slingshot.tscn" id="2_5qqdv"]
 
 [resource]
@@ -14,7 +14,8 @@ min_spread = 1.0
 max_spread = 60.0
 spread_inc_rate = 20.0
 spread_dec_rate = 0.5
-recoil_amount = Vector3(0.01, 0.2, 0.5)
+pos_recoil_amount = Vector3(0.01, 0.5, 0.5)
+rot_recoil_amount = Vector3(0.5, 0.5, 0.01)
 recoil_speed = 20.0
 snap_back_amount = 10.0
 fire_mode = 0

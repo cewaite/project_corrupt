@@ -15,7 +15,7 @@ points = PackedVector3Array(-0.6, -0.6, -0.6, 0.599972, 0.6, 0.6, 0.599972, 0.6,
 
 [node name="BoxLarge" type="RigidBody3D"]
 collision_layer = 288
-collision_mask = 31
+collision_mask = 287
 mass = 10.0
 script = ExtResource("1_b7lvv")
 
